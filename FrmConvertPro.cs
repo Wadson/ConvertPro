@@ -35,22 +35,10 @@ namespace Converter
             form.Show();
         }
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
-        {// Se não houver mais formulários abertos, redefine o lblJanelaAberta
-            if (pnlContainer.Controls.Count == 0)
-            {
-                lblJanelaAberta.Text = ".";
-                lblJanelaAberta.ForeColor = System.Drawing.Color.Black;
-            }
+        {
         }
         // Atualiza a lblJanelaAberta quando um formulário é fechado
-        private void VerificarJanelaAberta()
-        {
-            if (pnlContainer.Controls.Count == 0)
-            {
-                lblJanelaAberta.Text = ".";
-                lblJanelaAberta.ForeColor = System.Drawing.Color.Black;
-            }
-        }
+       
         private void btnFechar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -58,22 +46,17 @@ namespace Converter
 
         private void btnConvertMp_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FrmConverter());
-            lblJanelaAberta.Text = "Converter MP4 para MP3";
-            lblJanelaAberta.ForeColor = System.Drawing.Color.Green;
+            AbrirFormEnPanel(new FrmConverter());            
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FrmDowload());
-            lblJanelaAberta.Text = "Download de Vídeos";
-            lblJanelaAberta.ForeColor = System.Drawing.Color.Blue;
+            AbrirFormEnPanel(new FrmDowload());           
         }
 
         private void btnConverterMpTreis_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FrmConverterMpTreis());
-            lblJanelaAberta.Text = "Compressor de MP3";
+            AbrirFormEnPanel(new FrmConverterMpTreis());           
         }
     }
 }

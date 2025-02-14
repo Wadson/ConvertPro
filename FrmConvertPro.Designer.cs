@@ -41,13 +41,9 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnConvertMp = new System.Windows.Forms.Button();
             this.btnlogoInicio = new System.Windows.Forms.PictureBox();
-            this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
-            this.lblJanelaAberta = new System.Windows.Forms.Label();
             this.MenuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnlogoInicio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPalette1
@@ -67,10 +63,10 @@
             // pnlContainer
             // 
             this.pnlContainer.BackColor = System.Drawing.Color.White;
-            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlContainer.Location = new System.Drawing.Point(166, 44);
+            this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer.Location = new System.Drawing.Point(166, 0);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(557, 428);
+            this.pnlContainer.Size = new System.Drawing.Size(557, 472);
             this.pnlContainer.TabIndex = 8;
             // 
             // MenuVertical
@@ -97,14 +93,13 @@
             this.btnConverterMpTreis.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConverterMpTreis.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnConverterMpTreis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConverterMpTreis.ImageKey = "Audio.png";
+            this.btnConverterMpTreis.ImageKey = "Conversor.jpeg";
             this.btnConverterMpTreis.ImageList = this.imageList1;
-            this.btnConverterMpTreis.Location = new System.Drawing.Point(1, 154);
+            this.btnConverterMpTreis.Location = new System.Drawing.Point(1, 189);
             this.btnConverterMpTreis.Name = "btnConverterMpTreis";
-            this.btnConverterMpTreis.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnConverterMpTreis.Size = new System.Drawing.Size(162, 43);
+            this.btnConverterMpTreis.Size = new System.Drawing.Size(162, 62);
             this.btnConverterMpTreis.TabIndex = 17;
-            this.btnConverterMpTreis.Text = "Compressor";
+            this.btnConverterMpTreis.Text = "Compres";
             this.btnConverterMpTreis.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConverterMpTreis.UseVisualStyleBackColor = true;
             this.btnConverterMpTreis.Click += new System.EventHandler(this.btnConverterMpTreis_Click);
@@ -117,6 +112,11 @@
             this.imageList1.Images.SetKeyName(1, "LogoQuadradoTreis.png");
             this.imageList1.Images.SetKeyName(2, "MpConverter.png");
             this.imageList1.Images.SetKeyName(3, "Audio.png");
+            this.imageList1.Images.SetKeyName(4, "Down.jpeg");
+            this.imageList1.Images.SetKeyName(5, "Downlo.jpeg");
+            this.imageList1.Images.SetKeyName(6, "Conversor.jpeg");
+            this.imageList1.Images.SetKeyName(7, "Compressor.jpeg");
+            this.imageList1.Images.SetKeyName(8, "Dow.ico");
             // 
             // lbluser
             // 
@@ -160,12 +160,11 @@
             this.btnDownload.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDownload.ImageIndex = 0;
+            this.btnDownload.ImageIndex = 4;
             this.btnDownload.ImageList = this.imageList1;
-            this.btnDownload.Location = new System.Drawing.Point(1, 109);
+            this.btnDownload.Location = new System.Drawing.Point(1, 127);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnDownload.Size = new System.Drawing.Size(162, 43);
+            this.btnDownload.Size = new System.Drawing.Size(162, 62);
             this.btnDownload.TabIndex = 2;
             this.btnDownload.Text = "Download";
             this.btnDownload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -179,12 +178,11 @@
             this.btnConvertMp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConvertMp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnConvertMp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConvertMp.ImageIndex = 2;
+            this.btnConvertMp.ImageIndex = 6;
             this.btnConvertMp.ImageList = this.imageList1;
             this.btnConvertMp.Location = new System.Drawing.Point(1, 65);
             this.btnConvertMp.Name = "btnConvertMp";
-            this.btnConvertMp.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnConvertMp.Size = new System.Drawing.Size(162, 43);
+            this.btnConvertMp.Size = new System.Drawing.Size(162, 62);
             this.btnConvertMp.TabIndex = 1;
             this.btnConvertMp.Text = "Convert";
             this.btnConvertMp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -206,35 +204,12 @@
             this.btnlogoInicio.TabIndex = 0;
             this.btnlogoInicio.TabStop = false;
             // 
-            // kryptonPanel1
-            // 
-            this.kryptonPanel1.Controls.Add(this.lblJanelaAberta);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel1.Location = new System.Drawing.Point(166, 0);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.PaletteMode = Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.kryptonPanel1.Size = new System.Drawing.Size(557, 38);
-            this.kryptonPanel1.TabIndex = 0;
-            // 
-            // lblJanelaAberta
-            // 
-            this.lblJanelaAberta.AutoSize = true;
-            this.lblJanelaAberta.BackColor = System.Drawing.Color.Transparent;
-            this.lblJanelaAberta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJanelaAberta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
-            this.lblJanelaAberta.Location = new System.Drawing.Point(178, 6);
-            this.lblJanelaAberta.Name = "lblJanelaAberta";
-            this.lblJanelaAberta.Size = new System.Drawing.Size(17, 25);
-            this.lblJanelaAberta.TabIndex = 0;
-            this.lblJanelaAberta.Text = ".";
-            // 
             // FrmConvertPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.ClientSize = new System.Drawing.Size(723, 472);
-            this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.MenuVertical);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -247,9 +222,6 @@
             this.MenuVertical.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnlogoInicio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -265,9 +237,7 @@
         private System.Windows.Forms.Button btnConvertMp;
         private System.Windows.Forms.PictureBox btnlogoInicio;
         private System.Windows.Forms.ImageList imageList1;
-        private Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.Button btnConverterMpTreis;
-        private System.Windows.Forms.Label lblJanelaAberta;
     }
 }
 

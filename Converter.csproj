@@ -307,6 +307,10 @@
   <ItemGroup>
     <Content Include="DownloadsICO.ico" />
     <Content Include="LogoQuadrado.ico" />
+    <None Include="Resources\Compressor.jpeg" />
+    <None Include="Resources\Conversor.jpeg" />
+    <None Include="Resources\Downlo.jpeg" />
+    <None Include="Resources\Down.jpeg" />
     <None Include="Resources\Compressmptreis.png" />
     <None Include="Resources\Exit24.png" />
     <None Include="Resources\LogoConvertPro2  WR %281%29.png" />

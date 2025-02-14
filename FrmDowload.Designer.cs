@@ -63,12 +63,16 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.Downloader_BackProcess = new System.ComponentModel.BackgroundWorker();
             this.bgWorkerGetVideo = new System.ComponentModel.BackgroundWorker();
+            this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
+            this.lblJanelaAberta = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbAudioQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
+            this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPalette1
@@ -454,7 +458,7 @@
             // btnFechar
             // 
             this.btnFechar.Image = global::Converter.Properties.Resources.Exit24;
-            this.btnFechar.Location = new System.Drawing.Point(12, 12);
+            this.btnFechar.Location = new System.Drawing.Point(10, 5);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(35, 31);
             this.btnFechar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -507,13 +511,38 @@
             // 
             this.bgWorkerGetVideo.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorkerGetVideo_DoWork);
             // 
+            // kryptonPanel1
+            // 
+            this.kryptonPanel1.Controls.Add(this.btnFechar);
+            this.kryptonPanel1.Controls.Add(this.lblJanelaAberta);
+            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Name = "kryptonPanel1";
+            this.kryptonPanel1.PaletteMode = Krypton.Toolkit.PaletteMode.Office2007Blue;
+            this.kryptonPanel1.Size = new System.Drawing.Size(554, 38);
+            this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
+            this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(244)))));
+            this.kryptonPanel1.TabIndex = 53;
+            // 
+            // lblJanelaAberta
+            // 
+            this.lblJanelaAberta.AutoSize = true;
+            this.lblJanelaAberta.BackColor = System.Drawing.Color.Transparent;
+            this.lblJanelaAberta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJanelaAberta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lblJanelaAberta.Location = new System.Drawing.Point(135, 5);
+            this.lblJanelaAberta.Name = "lblJanelaAberta";
+            this.lblJanelaAberta.Size = new System.Drawing.Size(300, 25);
+            this.lblJanelaAberta.TabIndex = 0;
+            this.lblJanelaAberta.Text = "Download de Vídeo do YouTube";
+            // 
             // FrmDowload
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.ClientSize = new System.Drawing.Size(554, 425);
-            this.Controls.Add(this.btnFechar);
+            this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnAdicionarURL);
             this.Controls.Add(this.btnContinuar);
@@ -538,6 +567,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
+            this.kryptonPanel1.ResumeLayout(false);
+            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -578,6 +610,8 @@
         private System.Windows.Forms.Label lblTotalLinks;
         private System.Windows.Forms.CheckBox chkAudioOnly;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
+        private Krypton.Toolkit.KryptonPanel kryptonPanel1;
+        private System.Windows.Forms.Label lblJanelaAberta;
     }
 }
 
