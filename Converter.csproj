@@ -183,11 +183,11 @@
     <Compile Include="FrmDowload.Designer.cs">
       <DependentUpon>FrmDowload.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmConverter.cs">
+    <Compile Include="FrmConverterMpQuatro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmConverter.Designer.cs">
-      <DependentUpon>FrmConverter.cs</DependentUpon>
+    <Compile Include="FrmConverterMpQuatro.Designer.cs">
+      <DependentUpon>FrmConverterMpQuatro.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,8 +209,8 @@
     <EmbeddedResource Include="FrmDowload.resx">
       <DependentUpon>FrmDowload.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmConverter.resx">
-      <DependentUpon>FrmConverter.cs</DependentUpon>
+    <EmbeddedResource Include="FrmConverterMpQuatro.resx">
+      <DependentUpon>FrmConverterMpQuatro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

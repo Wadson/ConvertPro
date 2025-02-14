@@ -46,7 +46,7 @@ namespace Converter
 
         private void btnConvertMp_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FrmConverter());            
+            AbrirFormEnPanel(new FrmConverterMpQuatro());            
         }
 
         private void btnDownload_Click(object sender, EventArgs e)

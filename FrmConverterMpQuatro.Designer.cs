@@ -1,6 +1,6 @@
 ﻿namespace Converter
 {
-    partial class FrmConverterMpTreis
+    partial class FrmConverterMpQuatro
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -42,6 +42,7 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.btnFechar = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnOpenVideo = new System.Windows.Forms.Button();
             this.btnConverter = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
@@ -49,7 +50,6 @@
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             this.lblJanelaAberta = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOpenAudio = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cmbNivelCompressao)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
@@ -60,9 +60,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(20, 88);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(108, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(107, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Imput audio path:";
+            this.kryptonLabel1.Values.Text = "Imput vídeo path:";
             // 
             // txtPathVideo
             // 
@@ -161,7 +161,7 @@
             // btnFechar
             // 
             this.btnFechar.Image = global::Converter.Properties.Resources.Exit24;
-            this.btnFechar.Location = new System.Drawing.Point(10, 4);
+            this.btnFechar.Location = new System.Drawing.Point(12, 4);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(35, 31);
             this.btnFechar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -179,9 +179,23 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(42, 29);
             this.btnSave.TabIndex = 43;
-            this.toolTip1.SetToolTip(this.btnSave, "Local de salvamento dos arquivos");
+            this.toolTip1.SetToolTip(this.btnSave, "Local de destino dos arquivos");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnOpenVideo
+            // 
+            this.btnOpenVideo.BackgroundImage = global::Converter.Properties.Resources.Folders;
+            this.btnOpenVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOpenVideo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
+            this.btnOpenVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenVideo.Location = new System.Drawing.Point(437, 105);
+            this.btnOpenVideo.Name = "btnOpenVideo";
+            this.btnOpenVideo.Size = new System.Drawing.Size(42, 29);
+            this.btnOpenVideo.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.btnOpenVideo, "Adicionar arquivos de vídeos");
+            this.btnOpenVideo.UseVisualStyleBackColor = true;
+            this.btnOpenVideo.Click += new System.EventHandler(this.btnOpenVideo_Click);
             // 
             // btnConverter
             // 
@@ -193,7 +207,7 @@
             this.btnConverter.Name = "btnConverter";
             this.btnConverter.Size = new System.Drawing.Size(42, 29);
             this.btnConverter.TabIndex = 45;
-            this.toolTip1.SetToolTip(this.btnConverter, "Iniciar compressão");
+            this.toolTip1.SetToolTip(this.btnConverter, "Iniciar conversão");
             this.btnConverter.UseVisualStyleBackColor = true;
             this.btnConverter.Click += new System.EventHandler(this.btnConverter_Click);
             // 
@@ -233,7 +247,7 @@
             this.btnLimparLista.Name = "btnLimparLista";
             this.btnLimparLista.Size = new System.Drawing.Size(42, 29);
             this.btnLimparLista.TabIndex = 51;
-            this.toolTip1.SetToolTip(this.btnLimparLista, "Limpar lista");
+            this.toolTip1.SetToolTip(this.btnLimparLista, "Limpar Lista");
             this.btnLimparLista.UseVisualStyleBackColor = true;
             this.btnLimparLista.Click += new System.EventHandler(this.btnLimparLista_Click);
             // 
@@ -248,35 +262,21 @@
             this.kryptonPanel1.Size = new System.Drawing.Size(554, 38);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(244)))));
-            this.kryptonPanel1.TabIndex = 53;
+            this.kryptonPanel1.TabIndex = 52;
             // 
             // lblJanelaAberta
             // 
             this.lblJanelaAberta.AutoSize = true;
             this.lblJanelaAberta.BackColor = System.Drawing.Color.Transparent;
             this.lblJanelaAberta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJanelaAberta.ForeColor = System.Drawing.Color.Yellow;
+            this.lblJanelaAberta.ForeColor = System.Drawing.Color.White;
             this.lblJanelaAberta.Location = new System.Drawing.Point(163, 5);
             this.lblJanelaAberta.Name = "lblJanelaAberta";
-            this.lblJanelaAberta.Size = new System.Drawing.Size(249, 25);
+            this.lblJanelaAberta.Size = new System.Drawing.Size(226, 25);
             this.lblJanelaAberta.TabIndex = 0;
-            this.lblJanelaAberta.Text = "Compressão arquivos Mp3";
+            this.lblJanelaAberta.Text = "Converter Mp4 em Mp3";
             // 
-            // btnOpenAudio
-            // 
-            this.btnOpenAudio.BackgroundImage = global::Converter.Properties.Resources.Folders;
-            this.btnOpenAudio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOpenAudio.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
-            this.btnOpenAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenAudio.Location = new System.Drawing.Point(437, 105);
-            this.btnOpenAudio.Name = "btnOpenAudio";
-            this.btnOpenAudio.Size = new System.Drawing.Size(42, 29);
-            this.btnOpenAudio.TabIndex = 44;
-            this.toolTip1.SetToolTip(this.btnOpenAudio, "Adicionar arquivos de aúdio mp3");
-            this.btnOpenAudio.UseVisualStyleBackColor = true;
-            this.btnOpenAudio.Click += new System.EventHandler(this.btnOpenAudio_Click);
-            // 
-            // FrmConverterMpTreis
+            // FrmConverterMpQuatro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -287,7 +287,7 @@
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConverter);
-            this.Controls.Add(this.btnOpenAudio);
+            this.Controls.Add(this.btnOpenVideo);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.kryptonLabel3);
             this.Controls.Add(this.cmbNivelCompressao);
@@ -300,7 +300,7 @@
             this.Controls.Add(this.txtPathVideo);
             this.Controls.Add(this.kryptonLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmConverterMpTreis";
+            this.Name = "FrmConverterMpQuatro";
             this.Palette = this.kryptonPalette1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
@@ -330,6 +330,7 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private System.Windows.Forms.PictureBox btnFechar;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnOpenVideo;
         private System.Windows.Forms.Button btnConverter;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblProgress;
@@ -337,7 +338,6 @@
         private Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.Label lblJanelaAberta;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btnOpenAudio;
     }
 }
 
