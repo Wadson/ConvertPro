@@ -352,23 +352,24 @@ namespace Converter
                 txtTitle.Invoke((MethodInvoker)(() => txtTitle.Text = videoData.ToList()[0].Title));
             }
             if (playlist)
-                Status.Text = videoId.Count + " Videos";
+                Status.Text = videoId.Count + " Videos"; 
+               
             else
-                Status.Text = "Single Video";
+                Status.Text = "Single Video"; Status.BackColor = System.Drawing.Color.Green;
         }
 
         // Método para pausar o download
         void PausarDownload()
         {
             pauseEvent.Reset(); // Faz o download esperar
-            Status.Text = "Download pausado!";
+            Status.Text = "Download pausado!"; Status.BackColor = System.Drawing.Color.Red;
         }
 
         // Método para continuar o download
         void ContinuarDownload()
         {
             pauseEvent.Set(); // Permite que o download continue
-            Status.Text = "Download retomado!";
+            Status.Text = "Download retomado!";Status.BackColor = System.Drawing.Color.Green;
         }
 
         public class VideoDownloader
@@ -448,7 +449,7 @@ namespace Converter
         {
             totalbytes = 0;
             collctedbytes = 0;
-            Status.Text = "Preparando downloads...";
+            Status.Text = "Preparando downloads..."; Status.BackColor = System.Drawing.Color.Green;
             cancelTokenSource = new CancellationTokenSource(); // Reinicia o token de cancelamento
             CancellationToken cancelToken = cancelTokenSource.Token;
 
@@ -766,6 +767,7 @@ namespace Converter
             catch
             {
                 EmptyUrl();
+                Status.ForeColor = System.Drawing.Color.Red;
                 Status.Text = "Invalid Link";
             }
         }

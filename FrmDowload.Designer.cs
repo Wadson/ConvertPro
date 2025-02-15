@@ -143,9 +143,10 @@
             // 
             this.lblStatusContagem.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblStatusContagem.AutoSize = true;
+            this.lblStatusContagem.BackColor = System.Drawing.Color.Transparent;
             this.lblStatusContagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblStatusContagem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
-            this.lblStatusContagem.Location = new System.Drawing.Point(232, 150);
+            this.lblStatusContagem.Location = new System.Drawing.Point(241, 171);
             this.lblStatusContagem.Name = "lblStatusContagem";
             this.lblStatusContagem.Size = new System.Drawing.Size(28, 17);
             this.lblStatusContagem.TabIndex = 45;
@@ -184,7 +185,7 @@
             this.lblProgress.BackColor = System.Drawing.Color.Transparent;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
-            this.lblProgress.Location = new System.Drawing.Point(468, 149);
+            this.lblProgress.Location = new System.Drawing.Point(240, 148);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(45, 20);
             this.lblProgress.TabIndex = 44;
@@ -332,7 +333,7 @@
             this.progressBar.BackColor = System.Drawing.Color.White;
             this.progressBar.Location = new System.Drawing.Point(8, 148);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(454, 20);
+            this.progressBar.Size = new System.Drawing.Size(505, 20);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 46;
             // 
@@ -469,7 +470,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(252)))));
+            this.statusStrip1.BackColor = System.Drawing.Color.White;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.Status,
@@ -499,6 +500,7 @@
             // toolStripStatusLabelStatus
             // 
             this.toolStripStatusLabelStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.toolStripStatusLabelStatus.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.toolStripStatusLabelStatus.Name = "toolStripStatusLabelStatus";
             this.toolStripStatusLabelStatus.Size = new System.Drawing.Size(12, 17);
             this.toolStripStatusLabelStatus.Text = "-";
