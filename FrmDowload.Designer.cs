@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ListBoxURL = new Krypton.Toolkit.KryptonListBox();
             this.chkAudioOnly = new System.Windows.Forms.CheckBox();
-            this.lblTotalLinks = new System.Windows.Forms.Label();
             this.lblStatusContagem = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,7 +44,6 @@
             this.cmbQuality = new Krypton.Toolkit.KryptonComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTitle = new MetroFramework.Controls.MetroTextBox();
-            this.DataGridViewURL = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAdicionarURL = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.PictureBox();
+            this.btnLimparLista = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.Status = new System.Windows.Forms.ToolStripStatusLabel();
@@ -68,11 +68,9 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbAudioQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbQuality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewURL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kryptonPalette1
@@ -93,8 +91,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.ListBoxURL);
             this.groupBox1.Controls.Add(this.chkAudioOnly);
-            this.groupBox1.Controls.Add(this.lblTotalLinks);
             this.groupBox1.Controls.Add(this.lblStatusContagem);
             this.groupBox1.Controls.Add(this.btnBrowse);
             this.groupBox1.Controls.Add(this.label5);
@@ -106,7 +104,6 @@
             this.groupBox1.Controls.Add(this.cmbQuality);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtTitle);
-            this.groupBox1.Controls.Add(this.DataGridViewURL);
             this.groupBox1.Controls.Add(this.progressBar);
             this.groupBox1.Location = new System.Drawing.Point(10, 72);
             this.groupBox1.Name = "groupBox1";
@@ -114,6 +111,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Video Details:";
+            // 
+            // ListBoxURL
+            // 
+            this.ListBoxURL.AllowDrop = true;
+            this.ListBoxURL.Location = new System.Drawing.Point(7, 14);
+            this.ListBoxURL.Name = "ListBoxURL";
+            this.ListBoxURL.Size = new System.Drawing.Size(511, 123);
+            this.ListBoxURL.TabIndex = 49;
             // 
             // chkAudioOnly
             // 
@@ -128,17 +133,6 @@
             this.chkAudioOnly.Text = "Audio Only";
             this.chkAudioOnly.UseVisualStyleBackColor = true;
             // 
-            // lblTotalLinks
-            // 
-            this.lblTotalLinks.AutoSize = true;
-            this.lblTotalLinks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblTotalLinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
-            this.lblTotalLinks.Location = new System.Drawing.Point(8, 171);
-            this.lblTotalLinks.Name = "lblTotalLinks";
-            this.lblTotalLinks.Size = new System.Drawing.Size(83, 17);
-            this.lblTotalLinks.TabIndex = 47;
-            this.lblTotalLinks.Text = "TotalVideos";
-            // 
             // lblStatusContagem
             // 
             this.lblStatusContagem.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -146,7 +140,7 @@
             this.lblStatusContagem.BackColor = System.Drawing.Color.Transparent;
             this.lblStatusContagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblStatusContagem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
-            this.lblStatusContagem.Location = new System.Drawing.Point(241, 171);
+            this.lblStatusContagem.Location = new System.Drawing.Point(10, 172);
             this.lblStatusContagem.Name = "lblStatusContagem";
             this.lblStatusContagem.Size = new System.Drawing.Size(28, 17);
             this.lblStatusContagem.TabIndex = 45;
@@ -158,6 +152,8 @@
             this.btnBrowse.BackgroundImage = global::Converter.Properties.Resources.Folders;
             this.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnBrowse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
+            this.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Location = new System.Drawing.Point(471, 244);
             this.btnBrowse.Name = "btnBrowse";
@@ -185,7 +181,7 @@
             this.lblProgress.BackColor = System.Drawing.Color.Transparent;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblProgress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
-            this.lblProgress.Location = new System.Drawing.Point(240, 148);
+            this.lblProgress.Location = new System.Drawing.Point(448, 145);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(45, 20);
             this.lblProgress.TabIndex = 44;
@@ -314,26 +310,13 @@
             this.txtTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtTitle.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // DataGridViewURL
-            // 
-            this.DataGridViewURL.AllowUserToAddRows = false;
-            this.DataGridViewURL.AllowUserToDeleteRows = false;
-            this.DataGridViewURL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataGridViewURL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewURL.Location = new System.Drawing.Point(8, 17);
-            this.DataGridViewURL.Name = "DataGridViewURL";
-            this.DataGridViewURL.ReadOnly = true;
-            this.DataGridViewURL.Size = new System.Drawing.Size(505, 125);
-            this.DataGridViewURL.TabIndex = 31;
-            // 
             // progressBar
             // 
             this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.progressBar.BackColor = System.Drawing.Color.White;
-            this.progressBar.Location = new System.Drawing.Point(8, 148);
+            this.progressBar.Location = new System.Drawing.Point(6, 143);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(505, 20);
+            this.progressBar.Size = new System.Drawing.Size(437, 25);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar.TabIndex = 46;
             // 
@@ -343,6 +326,8 @@
             this.btnDownload.BackgroundImage = global::Converter.Properties.Resources.Down;
             this.btnDownload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDownload.FlatAppearance.BorderSize = 0;
+            this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Location = new System.Drawing.Point(364, 349);
             this.btnDownload.Name = "btnDownload";
@@ -358,6 +343,8 @@
             this.btnCancelar.BackgroundImage = global::Converter.Properties.Resources.Stop;
             this.btnCancelar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Location = new System.Drawing.Point(291, 349);
             this.btnCancelar.Name = "btnCancelar";
@@ -373,6 +360,8 @@
             this.btnPausar.BackgroundImage = global::Converter.Properties.Resources.Pause;
             this.btnPausar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnPausar.FlatAppearance.BorderSize = 0;
+            this.btnPausar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnPausar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnPausar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPausar.Location = new System.Drawing.Point(143, 349);
             this.btnPausar.Name = "btnPausar";
@@ -389,7 +378,7 @@
             // 
             // 
             this.txtUrl.CustomButton.Image = null;
-            this.txtUrl.CustomButton.Location = new System.Drawing.Point(389, 1);
+            this.txtUrl.CustomButton.Location = new System.Drawing.Point(349, 1);
             this.txtUrl.CustomButton.Name = "";
             this.txtUrl.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtUrl.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -407,7 +396,7 @@
             this.txtUrl.SelectionLength = 0;
             this.txtUrl.SelectionStart = 0;
             this.txtUrl.ShortcutsEnabled = true;
-            this.txtUrl.Size = new System.Drawing.Size(411, 23);
+            this.txtUrl.Size = new System.Drawing.Size(371, 23);
             this.txtUrl.TabIndex = 1;
             this.txtUrl.UseSelectable = true;
             this.txtUrl.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -432,6 +421,8 @@
             this.btnContinuar.BackgroundImage = global::Converter.Properties.Resources.Continuar;
             this.btnContinuar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnContinuar.FlatAppearance.BorderSize = 0;
+            this.btnContinuar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnContinuar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnContinuar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContinuar.Location = new System.Drawing.Point(212, 349);
             this.btnContinuar.Name = "btnContinuar";
@@ -447,19 +438,21 @@
             this.btnAdicionarURL.BackgroundImage = global::Converter.Properties.Resources.add_link_24;
             this.btnAdicionarURL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnAdicionarURL.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
+            this.btnAdicionarURL.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnAdicionarURL.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnAdicionarURL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdicionarURL.Location = new System.Drawing.Point(488, 43);
+            this.btnAdicionarURL.Location = new System.Drawing.Point(444, 43);
             this.btnAdicionarURL.Name = "btnAdicionarURL";
             this.btnAdicionarURL.Size = new System.Drawing.Size(42, 29);
             this.btnAdicionarURL.TabIndex = 43;
-            this.toolTip1.SetToolTip(this.btnAdicionarURL, "Localizar local de salvamento");
+            this.toolTip1.SetToolTip(this.btnAdicionarURL, "Inserir Link na lista");
             this.btnAdicionarURL.UseVisualStyleBackColor = true;
             this.btnAdicionarURL.Click += new System.EventHandler(this.btnAdicionarURL_Click);
             // 
             // btnFechar
             // 
-            this.btnFechar.Image = global::Converter.Properties.Resources.Exit24;
-            this.btnFechar.Location = new System.Drawing.Point(10, 5);
+            this.btnFechar.Image = global::Converter.Properties.Resources.Close;
+            this.btnFechar.Location = new System.Drawing.Point(4, 3);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(35, 31);
             this.btnFechar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -467,6 +460,22 @@
             this.btnFechar.TabStop = false;
             this.toolTip1.SetToolTip(this.btnFechar, "Sair");
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
+            // 
+            // btnLimparLista
+            // 
+            this.btnLimparLista.BackgroundImage = global::Converter.Properties.Resources.Clear;
+            this.btnLimparLista.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLimparLista.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
+            this.btnLimparLista.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnLimparLista.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
+            this.btnLimparLista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimparLista.Location = new System.Drawing.Point(491, 43);
+            this.btnLimparLista.Name = "btnLimparLista";
+            this.btnLimparLista.Size = new System.Drawing.Size(42, 29);
+            this.btnLimparLista.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.btnLimparLista, "Limpar lista");
+            this.btnLimparLista.UseVisualStyleBackColor = true;
+            this.btnLimparLista.Click += new System.EventHandler(this.btnLimparLista_Click);
             // 
             // statusStrip1
             // 
@@ -515,13 +524,10 @@
             // 
             // kryptonPanel1
             // 
-            this.kryptonPanel1.Controls.Add(this.btnFechar);
-            this.kryptonPanel1.Controls.Add(this.lblJanelaAberta);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 0);
+            this.kryptonPanel1.Location = new System.Drawing.Point(0, 38);
             this.kryptonPanel1.Name = "kryptonPanel1";
             this.kryptonPanel1.PaletteMode = Krypton.Toolkit.PaletteMode.Office2007Blue;
-            this.kryptonPanel1.Size = new System.Drawing.Size(554, 38);
+            this.kryptonPanel1.Size = new System.Drawing.Size(554, 1);
             this.kryptonPanel1.StateCommon.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.kryptonPanel1.StateCommon.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(244)))));
             this.kryptonPanel1.TabIndex = 53;
@@ -531,8 +537,8 @@
             this.lblJanelaAberta.AutoSize = true;
             this.lblJanelaAberta.BackColor = System.Drawing.Color.Transparent;
             this.lblJanelaAberta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJanelaAberta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.lblJanelaAberta.Location = new System.Drawing.Point(135, 5);
+            this.lblJanelaAberta.ForeColor = System.Drawing.Color.Red;
+            this.lblJanelaAberta.Location = new System.Drawing.Point(127, 10);
             this.lblJanelaAberta.Name = "lblJanelaAberta";
             this.lblJanelaAberta.Size = new System.Drawing.Size(300, 25);
             this.lblJanelaAberta.TabIndex = 0;
@@ -544,6 +550,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
             this.ClientSize = new System.Drawing.Size(554, 425);
+            this.Controls.Add(this.btnFechar);
+            this.Controls.Add(this.lblJanelaAberta);
+            this.Controls.Add(this.btnLimparLista);
             this.Controls.Add(this.kryptonPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnAdicionarURL);
@@ -560,18 +569,14 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.Text = "ConvertPro";
-            this.Load += new System.EventHandler(this.FrmDowload_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbAudioQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbQuality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewURL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFechar)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
-            this.kryptonPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,7 +585,6 @@
         #endregion
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView DataGridViewURL;
         private MetroFramework.Controls.MetroTextBox txtUrl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPausar;
@@ -609,11 +613,12 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.ComponentModel.BackgroundWorker Downloader_BackProcess;
         private System.ComponentModel.BackgroundWorker bgWorkerGetVideo;
-        private System.Windows.Forms.Label lblTotalLinks;
         private System.Windows.Forms.CheckBox chkAudioOnly;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelStatus;
         private Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.Label lblJanelaAberta;
+        private Krypton.Toolkit.KryptonListBox ListBoxURL;
+        private System.Windows.Forms.Button btnLimparLista;
     }
 }
 

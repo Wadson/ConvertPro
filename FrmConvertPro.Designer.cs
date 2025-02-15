@@ -41,9 +41,12 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnConvertMp = new System.Windows.Forms.Button();
             this.btnlogoInicio = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer.SuspendLayout();
             this.MenuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnlogoInicio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPalette1
@@ -63,6 +66,7 @@
             // pnlContainer
             // 
             this.pnlContainer.BackColor = System.Drawing.Color.White;
+            this.pnlContainer.Controls.Add(this.pictureBox1);
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer.Location = new System.Drawing.Point(166, 0);
             this.pnlContainer.Name = "pnlContainer";
@@ -88,12 +92,14 @@
             // 
             // btnConverterMpTreis
             // 
-            this.btnConverterMpTreis.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnConverterMpTreis.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnConverterMpTreis.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
+            this.btnConverterMpTreis.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnConverterMpTreis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConverterMpTreis.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConverterMpTreis.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnConverterMpTreis.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConverterMpTreis.ImageKey = "Conversor.jpeg";
+            this.btnConverterMpTreis.ImageIndex = 6;
             this.btnConverterMpTreis.ImageList = this.imageList1;
             this.btnConverterMpTreis.Location = new System.Drawing.Point(1, 189);
             this.btnConverterMpTreis.Name = "btnConverterMpTreis";
@@ -112,11 +118,9 @@
             this.imageList1.Images.SetKeyName(1, "LogoQuadradoTreis.png");
             this.imageList1.Images.SetKeyName(2, "MpConverter.png");
             this.imageList1.Images.SetKeyName(3, "Audio.png");
-            this.imageList1.Images.SetKeyName(4, "Down.jpeg");
-            this.imageList1.Images.SetKeyName(5, "Downlo.jpeg");
-            this.imageList1.Images.SetKeyName(6, "Conversor.jpeg");
-            this.imageList1.Images.SetKeyName(7, "Compressor.jpeg");
-            this.imageList1.Images.SetKeyName(8, "Dow.ico");
+            this.imageList1.Images.SetKeyName(4, "ConversorMpQuatro.png");
+            this.imageList1.Images.SetKeyName(5, "Download (1).png");
+            this.imageList1.Images.SetKeyName(6, "MpTreisCompress.png");
             // 
             // lbluser
             // 
@@ -155,12 +159,14 @@
             // 
             // btnDownload
             // 
-            this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnDownload.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
+            this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnDownload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDownload.ImageIndex = 4;
+            this.btnDownload.ImageIndex = 5;
             this.btnDownload.ImageList = this.imageList1;
             this.btnDownload.Location = new System.Drawing.Point(1, 127);
             this.btnDownload.Name = "btnDownload";
@@ -173,12 +179,14 @@
             // 
             // btnConvertMp
             // 
-            this.btnConvertMp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnConvertMp.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnConvertMp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
+            this.btnConvertMp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
             this.btnConvertMp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConvertMp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConvertMp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(142)))), ((int)(((byte)(255)))));
             this.btnConvertMp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConvertMp.ImageIndex = 6;
+            this.btnConvertMp.ImageIndex = 4;
             this.btnConvertMp.ImageList = this.imageList1;
             this.btnConvertMp.Location = new System.Drawing.Point(1, 65);
             this.btnConvertMp.Name = "btnConvertMp";
@@ -204,6 +212,17 @@
             this.btnlogoInicio.TabIndex = 0;
             this.btnlogoInicio.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.Image = global::Converter.Properties.Resources.LogoQuadradoTreis;
+            this.pictureBox1.Location = new System.Drawing.Point(183, 170);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(140, 115);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // FrmConvertPro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,12 +235,13 @@
             this.Name = "FrmConvertPro";
             this.Palette = this.kryptonPalette1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.ShowIcon = false;
             this.Text = "Converter Mp4 pra Mp3";
+            this.pnlContainer.ResumeLayout(false);
             this.MenuVertical.ResumeLayout(false);
             this.MenuVertical.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnlogoInicio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +258,7 @@
         private System.Windows.Forms.PictureBox btnlogoInicio;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btnConverterMpTreis;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

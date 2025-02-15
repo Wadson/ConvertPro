@@ -1,6 +1,6 @@
 ﻿namespace Converter
 {
-    partial class FrmConverterMpQuatro
+    partial class FrmCompressMpTreis
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtPathVideo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.txtSaveTo = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtSalvarEm = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.listBoxVideos = new Krypton.Toolkit.KryptonListBox();
             this.progressBar = new Krypton.Toolkit.KryptonProgressBar();
@@ -41,13 +41,13 @@
             this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.btnFechar = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnOpenVideo = new System.Windows.Forms.Button();
             this.btnConverter = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblProgress = new System.Windows.Forms.Label();
             this.btnLimparLista = new System.Windows.Forms.Button();
             this.lblJanelaAberta = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnOpenAudio = new System.Windows.Forms.Button();
             this.kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,9 +64,9 @@
             // 
             this.kryptonLabel1.Location = new System.Drawing.Point(20, 88);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(107, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(108, 20);
             this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Imput vídeo path:";
+            this.kryptonLabel1.Values.Text = "Imput audio path:";
             // 
             // txtPathVideo
             // 
@@ -75,13 +75,13 @@
             this.txtPathVideo.Size = new System.Drawing.Size(406, 23);
             this.txtPathVideo.TabIndex = 1;
             // 
-            // txtSaveTo
+            // txtSalvarEm
             // 
-            this.txtSaveTo.Location = new System.Drawing.Point(20, 335);
-            this.txtSaveTo.Name = "txtSaveTo";
-            this.txtSaveTo.Size = new System.Drawing.Size(454, 23);
-            this.txtSaveTo.TabIndex = 2;
-            this.txtSaveTo.TextChanged += new System.EventHandler(this.txtSaveTo_TextChanged);
+            this.txtSalvarEm.Location = new System.Drawing.Point(20, 335);
+            this.txtSalvarEm.Name = "txtSalvarEm";
+            this.txtSalvarEm.Size = new System.Drawing.Size(454, 23);
+            this.txtSalvarEm.TabIndex = 2;
+            this.txtSalvarEm.TextChanged += new System.EventHandler(this.txtSalvarEm_TextChanged);
             // 
             // kryptonLabel2
             // 
@@ -175,25 +175,9 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(42, 29);
             this.btnSave.TabIndex = 43;
-            this.toolTip1.SetToolTip(this.btnSave, "Local de destino dos arquivos");
+            this.toolTip1.SetToolTip(this.btnSave, "Local de salvamento dos arquivos");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnOpenVideo
-            // 
-            this.btnOpenVideo.BackgroundImage = global::Converter.Properties.Resources.Folders;
-            this.btnOpenVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnOpenVideo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
-            this.btnOpenVideo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
-            this.btnOpenVideo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
-            this.btnOpenVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenVideo.Location = new System.Drawing.Point(437, 105);
-            this.btnOpenVideo.Name = "btnOpenVideo";
-            this.btnOpenVideo.Size = new System.Drawing.Size(42, 29);
-            this.btnOpenVideo.TabIndex = 44;
-            this.toolTip1.SetToolTip(this.btnOpenVideo, "Adicionar arquivos de vídeos");
-            this.btnOpenVideo.UseVisualStyleBackColor = true;
-            this.btnOpenVideo.Click += new System.EventHandler(this.btnOpenVideo_Click);
             // 
             // btnConverter
             // 
@@ -207,7 +191,7 @@
             this.btnConverter.Name = "btnConverter";
             this.btnConverter.Size = new System.Drawing.Size(42, 29);
             this.btnConverter.TabIndex = 45;
-            this.toolTip1.SetToolTip(this.btnConverter, "Iniciar conversão");
+            this.toolTip1.SetToolTip(this.btnConverter, "Iniciar compressão");
             this.btnConverter.UseVisualStyleBackColor = true;
             this.btnConverter.Click += new System.EventHandler(this.btnConverter_Click);
             // 
@@ -251,7 +235,7 @@
             this.btnLimparLista.Name = "btnLimparLista";
             this.btnLimparLista.Size = new System.Drawing.Size(42, 29);
             this.btnLimparLista.TabIndex = 51;
-            this.toolTip1.SetToolTip(this.btnLimparLista, "Limpar Lista");
+            this.toolTip1.SetToolTip(this.btnLimparLista, "Limpar lista");
             this.btnLimparLista.UseVisualStyleBackColor = true;
             this.btnLimparLista.Click += new System.EventHandler(this.btnLimparLista_Click);
             // 
@@ -260,12 +244,28 @@
             this.lblJanelaAberta.AutoSize = true;
             this.lblJanelaAberta.BackColor = System.Drawing.Color.Transparent;
             this.lblJanelaAberta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJanelaAberta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(244)))));
-            this.lblJanelaAberta.Location = new System.Drawing.Point(167, 10);
+            this.lblJanelaAberta.ForeColor = System.Drawing.Color.SeaGreen;
+            this.lblJanelaAberta.Location = new System.Drawing.Point(161, 10);
             this.lblJanelaAberta.Name = "lblJanelaAberta";
-            this.lblJanelaAberta.Size = new System.Drawing.Size(226, 25);
+            this.lblJanelaAberta.Size = new System.Drawing.Size(249, 25);
             this.lblJanelaAberta.TabIndex = 0;
-            this.lblJanelaAberta.Text = "Converter Mp4 em Mp3";
+            this.lblJanelaAberta.Text = "Compressão arquivos Mp3";
+            // 
+            // btnOpenAudio
+            // 
+            this.btnOpenAudio.BackgroundImage = global::Converter.Properties.Resources.Folders;
+            this.btnOpenAudio.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnOpenAudio.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(252)))));
+            this.btnOpenAudio.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(217)))), ((int)(((byte)(226)))));
+            this.btnOpenAudio.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(199)))), ((int)(((byte)(137)))));
+            this.btnOpenAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenAudio.Location = new System.Drawing.Point(437, 105);
+            this.btnOpenAudio.Name = "btnOpenAudio";
+            this.btnOpenAudio.Size = new System.Drawing.Size(42, 29);
+            this.btnOpenAudio.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.btnOpenAudio, "Adicionar arquivos de aúdio mp3");
+            this.btnOpenAudio.UseVisualStyleBackColor = true;
+            this.btnOpenAudio.Click += new System.EventHandler(this.btnOpenAudio_Click);
             // 
             // kryptonPanel1
             // 
@@ -288,7 +288,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 403);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(554, 22);
-            this.statusStrip1.TabIndex = 55;
+            this.statusStrip1.TabIndex = 56;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
@@ -308,14 +308,14 @@
             // 
             // lblStatus
             // 
-            this.lblStatus.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(244)))));
-            this.lblStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(42)))), ((int)(((byte)(83)))));
+            this.lblStatus.ActiveLinkColor = System.Drawing.Color.Red;
+            this.lblStatus.ForeColor = System.Drawing.Color.SeaGreen;
             this.lblStatus.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(12, 17);
             this.lblStatus.Text = "-";
             // 
-            // FrmConverterMpQuatro
+            // FrmCompressMpTreis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -329,7 +329,7 @@
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnConverter);
-            this.Controls.Add(this.btnOpenVideo);
+            this.Controls.Add(this.btnOpenAudio);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.kryptonLabel3);
             this.Controls.Add(this.cmbNivelCompressao);
@@ -337,11 +337,11 @@
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listBoxVideos);
             this.Controls.Add(this.kryptonLabel2);
-            this.Controls.Add(this.txtSaveTo);
+            this.Controls.Add(this.txtSalvarEm);
             this.Controls.Add(this.txtPathVideo);
             this.Controls.Add(this.kryptonLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmConverterMpQuatro";
+            this.Name = "FrmCompressMpTreis";
             this.Palette = this.kryptonPalette1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
@@ -360,7 +360,7 @@
 
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtPathVideo;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtSaveTo;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtSalvarEm;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
         private Krypton.Toolkit.KryptonListBox listBoxVideos;
         private Krypton.Toolkit.KryptonProgressBar progressBar;
@@ -370,13 +370,13 @@
         private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
         private System.Windows.Forms.PictureBox btnFechar;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnOpenVideo;
         private System.Windows.Forms.Button btnConverter;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Button btnLimparLista;
         private System.Windows.Forms.Label lblJanelaAberta;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnOpenAudio;
         private Krypton.Toolkit.KryptonPanel kryptonPanel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;

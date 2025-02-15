@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using ComponentFactory.Krypton.Toolkit;
 using FFMpegCore;
@@ -11,14 +12,14 @@ using NReco.VideoConverter;
 
 namespace Converter
 {
-    public partial class FrmConverterMpQuatro : KryptonForm
+    public partial class FrmCompressMpTreis : KryptonForm
     {
         private List<string> mediaPaths = new List<string>();
         private string outputFolder;
         private BackgroundWorker worker;
         private bool cancelRequested = false;
 
-        public FrmConverterMpQuatro()
+        public FrmCompressMpTreis()
         {
             InitializeComponent();
             lblTotalVideos.Text = "Total de arquivos: 0";
@@ -31,10 +32,10 @@ namespace Converter
 
         private void ToggleControls(bool enabled)
         {
-            btnOpenVideo.Enabled = enabled;
+            btnOpenAudio.Enabled = enabled;
             btnSave.Enabled = enabled;
             btnConverter.Enabled = enabled;
-            txtSaveTo.Enabled = enabled;
+            txtSalvarEm.Enabled = enabled;
             cmbNivelCompressao.Enabled = enabled;
             btnCancelar.Enabled = !enabled;
         }
@@ -52,41 +53,9 @@ namespace Converter
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 outputFolder = folderBrowserDialog.SelectedPath;
-                txtSaveTo.Text = outputFolder;
+                txtSalvarEm.Text = outputFolder;
             }
         }
-
-        private void btnOpenVideo_Click(object sender, EventArgs e)
-        {
-            if (worker != null && worker.IsBusy) return;
-
-            OpenFileDialog openFileDialog = new OpenFileDialog()
-            {
-                Multiselect = true,
-                Filter = "Vídeos MP4|*.mp4"
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                AdicionarArquivos(openFileDialog.FileNames);
-            }
-        }
-
-       
-
-        private void AdicionarArquivos(string[] arquivos)
-        {
-            foreach (var file in arquivos)
-            {
-                if (!mediaPaths.Contains(file))
-                {
-                    mediaPaths.Add(file);
-                    listBoxVideos.Items.Add(file);
-                }
-            }
-            lblTotalVideos.Text = $"Total de arquivos: {mediaPaths.Count}";
-        }
-
 
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -99,18 +68,33 @@ namespace Converter
             }
         }
 
-        private void btnConverter_Click(object sender, EventArgs e)
+        private void ComprimirMpTreis()
         {
+
             if (mediaPaths.Count == 0 || string.IsNullOrEmpty(outputFolder))
             {
                 MessageBox.Show("Adicione arquivos e escolha um diretório de saída antes de converter.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            if (cmbNivelCompressao.SelectedItem == null || !int.TryParse(cmbNivelCompressao.SelectedItem.ToString(), out int bitrate))
+            {
+                MessageBox.Show("Selecione um nível de compressão válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Filtra apenas arquivos .mp3
+            var mp3Files = mediaPaths.Where(p => Path.GetExtension(p).ToLower() == ".mp3").ToList();
+            if (mp3Files.Count == 0)
+            {
+                MessageBox.Show("Nenhum arquivo MP3 foi encontrado para compressão.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             ToggleControls(false);
-            progressBar.Maximum = mediaPaths.Count;
+            progressBar.Maximum = mp3Files.Count;
             progressBar.Value = 0;
-            lblStatus.Text = "Iniciando conversão...";
+            lblStatus.Text = "Iniciando compressão...";
             lblProgress.Text = "0%";
             cancelRequested = false;
 
@@ -123,7 +107,7 @@ namespace Converter
             worker.DoWork += (s, ev) =>
             {
                 var converter = new FFMpegConverter();
-                for (int i = 0; i < mediaPaths.Count; i++)
+                for (int i = 0; i < mp3Files.Count; i++)
                 {
                     if (cancelRequested)
                     {
@@ -131,34 +115,45 @@ namespace Converter
                         return;
                     }
 
-                    string filePath = mediaPaths[i];
-                    string fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
-                    string extension = System.IO.Path.GetExtension(filePath).ToLower();
-
-                    // Se não for MP4, ignora
-                    if (extension != ".mp4") continue;
+                    string filePath = mp3Files[i];
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    string compressedFilePath = Path.Combine(outputFolder, fileName + "_compressed.mp3");
 
                     worker.ReportProgress(i + 1, fileName);
-                    string outputFilePath = System.IO.Path.Combine(outputFolder, fileName + ".mp3");
 
                     try
                     {
-                        // Verifica se o arquivo tem trilha de áudio
-                        if (!HasAudioTrack(filePath))
+                        var audioSettings = new ConvertSettings
                         {
-                            MessageBox.Show($"O arquivo \"{fileName}\" não contém áudio e não pode ser convertido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            continue;
-                        }
+                            CustomOutputArgs = $"-b:a {bitrate}k -acodec libmp3lame"
+                        };
 
-                        // Converte MP4 para MP3
-                        converter.ConvertMedia(filePath, null, outputFilePath, "mp3", new ConvertSettings
+                        converter.ConvertMedia(filePath, null, compressedFilePath, "mp3", audioSettings);
+
+                        if (File.Exists(compressedFilePath))
                         {
-                            CustomOutputArgs = "-vn -acodec libmp3lame -q:a 2 -map 0:a"
-                        });
+                            Thread.Sleep(500); // Pequeno delay para garantir que o sistema finalize o processo
+
+                            string finalPath = Path.Combine(outputFolder, fileName + "_compressed.mp3");
+                            File.Move(compressedFilePath, finalPath);
+
+                            if (File.Exists(finalPath))
+                            {
+                                Console.WriteLine($"Arquivo \"{fileName}\" compactado com sucesso!");
+                            }
+                            else
+                            {
+                                MessageBox.Show($"Erro ao mover o arquivo compactado \"{fileName}\".", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Falha ao comprimir \"{fileName}\". O arquivo de saída não foi criado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Erro ao converter \"{fileName}\": {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Erro ao comprimir \"{fileName}\": {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             };
@@ -166,8 +161,8 @@ namespace Converter
             worker.ProgressChanged += (s, ev) =>
             {
                 progressBar.Value = ev.ProgressPercentage;
-                lblStatus.Text = $"Processando {ev.UserState} ({ev.ProgressPercentage}/{mediaPaths.Count})";
-                lblProgress.Text = $"{(ev.ProgressPercentage * 100 / mediaPaths.Count)}%";
+                lblStatus.Text = $"Processando {ev.UserState} ({ev.ProgressPercentage}/{mp3Files.Count})";
+                lblProgress.Text = $"{(ev.ProgressPercentage * 100 / mp3Files.Count):0}%";
 
                 int index = ev.ProgressPercentage - 1;
                 if (index >= 0 && index < listBoxVideos.Items.Count)
@@ -182,12 +177,12 @@ namespace Converter
                 if (ev.Cancelled)
                 {
                     lblStatus.Text = "Processo cancelado!";
-                    MessageBox.Show("A conversão foi cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("A compressão foi cancelada.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
                     lblStatus.Text = "Processo concluído!";
-                    MessageBox.Show("Conversão finalizada!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Compressão finalizada!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 lblProgress.Text = "100%";
@@ -195,6 +190,10 @@ namespace Converter
             };
 
             worker.RunWorkerAsync();
+        }
+        private void btnConverter_Click(object sender, EventArgs e)
+        {
+          ComprimirMpTreis();
         }
 
         private bool HasAudioTrack(string videoPath)
@@ -217,6 +216,36 @@ namespace Converter
             lblTotalVideos.Text = "Total de arquivos: 0";
         }
 
+        private void btnOpenAudio_Click(object sender, EventArgs e)
+        {
+            if (worker != null && worker.IsBusy) return;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Multiselect = true,
+                Filter = "Arquivos MP3|*.mp3"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AdicionarArquivos(openFileDialog.FileNames);
+            }
+        }
+
+
+        private void AdicionarArquivos(string[] arquivos)
+        {
+            foreach (var file in arquivos)
+            {
+                if (!mediaPaths.Contains(file))
+                {
+                    mediaPaths.Add(file);
+                    listBoxVideos.Items.Add(file);
+                }
+            }
+            lblTotalVideos.Text = $"Total de arquivos: {mediaPaths.Count}";
+        }
+
         private void listBoxVideos_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -224,17 +253,16 @@ namespace Converter
                 e.Effect = DragDropEffects.Copy;
             }
         }
-
         private void listBoxVideos_DragDrop(object sender, DragEventArgs e)
         {
             string[] arquivos = (string[])e.Data.GetData(DataFormats.FileDrop);
-            string[] arquivosMp4 = arquivos.Where(f => Path.GetExtension(f).ToLower() == ".mp4").ToArray();
-            AdicionarArquivos(arquivosMp4);
+            string[] arquivosMp3 = arquivos.Where(f => Path.GetExtension(f).ToLower() == ".mp3").ToArray();
+            AdicionarArquivos(arquivosMp3);
         }
 
-        private void txtSaveTo_TextChanged(object sender, EventArgs e)
+        private void txtSalvarEm_TextChanged(object sender, EventArgs e)
         {
-            outputFolder = txtSaveTo.Text;
+            outputFolder = txtSalvarEm.Text;
         }
     }
 }

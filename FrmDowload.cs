@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
+using System.Drawing;
 
 
 namespace Converter
@@ -22,6 +23,7 @@ namespace Converter
     {
         private YouTube youtube = YouTube.Default;
         public HashSet<string> videoId = new HashSet<string>();
+        private List<string> mediaPaths = new List<string>();
         private long totalbytes = 0;
         private long collctedbytes = 0;
         private string selectedVideoQuality = "";
@@ -40,31 +42,26 @@ namespace Converter
         public FrmDowload()
         {
             InitializeComponent();
-
-            // Adicione este código ao carregar o formulário
-            this.Load += new EventHandler(FrmDowload_Load);
-
+            
             // Configurações iniciais do TextBox
             txtUrl.Text = "Enter video link";
             txtUrl.GotFocus += RemoveText;
-            txtUrl.LostFocus += AddText;
-
-            AtualizarTotalLinks();    //implementado por Wadson
+            txtUrl.LostFocus += AddText;           
             InitializeButtons();
-            DataGridViewURL.RowsAdded += new DataGridViewRowsAddedEventHandler(CheckDataGridView);
-            DataGridViewURL.RowsRemoved += new DataGridViewRowsRemovedEventHandler(CheckDataGridView);
-
-            downloader = new VideoDownloader(); // Instância global
-
+            ListBoxURL.SelectedIndexChanged += new EventHandler(CheckListBox);
+            downloader = new VideoDownloader(this); // Instância global
         }
-        private void CheckDataGridView(object sender, EventArgs e)
+        private void CheckListBox(object sender, EventArgs e)
         {
-            if (DataGridViewURL.Rows.Count > 0)
+            if (ListBoxURL.Items.Count > 0)
             {
+                // Habilita os botões de Browse e Download quando houver itens no ListBox
                 btnBrowse.Enabled = true;
+                btnDownload.Enabled = true;
             }
             else
             {
+                // Desabilita todos os botões quando não houver itens no ListBox
                 btnCancelar.Enabled = false;
                 btnPausar.Enabled = false;
                 btnContinuar.Enabled = false;
@@ -72,16 +69,17 @@ namespace Converter
                 btnBrowse.Enabled = false;
             }
         }
+
         private void InitializeButtons()
         {
+            // Inicializa os botões com seus estados iniciais
             btnAdicionarURL.Enabled = true;
             btnCancelar.Enabled = false;
             btnPausar.Enabled = false;
             btnContinuar.Enabled = false;
             btnDownload.Enabled = false;
             btnBrowse.Enabled = false;
-        }
-        //implementado por Wadson
+        }       
         // Evento para limpar o texto quando o usuário clicar no TextBox
         public void RemoveText(object sender, EventArgs e)
         {
@@ -99,11 +97,7 @@ namespace Converter
                 txtUrl.Text = "Enter video link";
             }
         }
-        private void AtualizarTotalLinks()
-        {
-            lblTotalLinks.Text = $"Total de Links: {DataGridViewURL.Rows.Count}";
-        }
-        // Implementado por Wadson
+       
 
         private string LimparUrl(string url)
         {
@@ -133,25 +127,25 @@ namespace Converter
             }
         }
 
-        private void btnAdicionarURL_Click(object sender, EventArgs e)
+        private void AdicionarLinkListBoxURL()
         {
             string url = txtUrl.Text.Trim();
 
             if (string.IsNullOrEmpty(url))
             {
-                MessageBox.Show("Por favor, insira uma URL.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter a valid URL");
+                return;
+            }
+
+            // Verifica se a URL já foi adicionada ao ListBox antes de adicionar
+            if (ListBoxURL.Items.Contains(url))
+            {
+                MessageBox.Show("Este link já foi adicionado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
-                // Verifica se a coluna "URLs" já foi adicionada
-                if (DataGridViewURL.Columns.Count == 0)
-                {
-                    DataGridViewURL.Columns.Add("URLs", "URLs");
-                    DataGridViewURL.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                }
-
                 // Obtém os vídeos da URL fornecida
                 var video = youtube.GetVideo(url);
 
@@ -161,27 +155,21 @@ namespace Converter
                     return;
                 }
 
-                string formattedUrl = url;
+                // Adiciona a URL ao ListBox somente se não for duplicada
+                ListBoxURL.Items.Add(url);
+                txtUrl.Clear();  // Limpa o campo de texto
 
-                // Verifica se a URL já foi adicionada ao DataGridView
-                bool isUrlExists = DataGridViewURL.Rows.Cast<DataGridViewRow>()
-                                    .Any(row => row.Cells["URLs"].Value?.ToString() == formattedUrl);
-
-                if (!isUrlExists)
-                {
-                    // Adiciona a URL ao DataGridView
-                    DataGridViewURL.Rows.Add(formattedUrl);
-                    AtualizarTotalLinks();//implementado por Wadson
-                }
-                else
-                {
-                    MessageBox.Show("Este link já foi adicionado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                CheckListBox(null, EventArgs.Empty);  // Verifica se os botões precisam ser habilitados ou desabilitados
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao processar a URL: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnAdicionarURL_Click(object sender, EventArgs e)
+        {
+          AdicionarLinkListBoxURL();
         }
         // Método para extrair o ID do vídeo do YouTube
         private string ExtrairVideoId(string url)
@@ -222,25 +210,17 @@ namespace Converter
             }
         }
 
-        private string ByteConverter(long b)
+        public static string ByteConverter(long bytes)
         {
-            string final;
-            //to kb 
-            float c = (float)b;
-            c /= 1024;
-            final = c.ToString("0.00") + " KB";
-            if (c >= (float)1)
-            {//to mb
-                c /= 1024;
-                final = c.ToString("0.00") + " MB";
-            }
-            else if (c >= (float)1)
-            {
-                //to gb
-                c /= 1024;
-                final = c.ToString("0.00") + " GB";
-            }
-            return final;
+            // Sua implementação para converter bytes em uma string legível
+            // Exemplo:
+            if (bytes >= 1073741824)
+                return $"{bytes / 1073741824} GB";
+            if (bytes >= 1048576)
+                return $"{bytes / 1048576} MB";
+            if (bytes >= 1024)
+                return $"{bytes / 1024} KB";
+            return $"{bytes} bytes";
         }
         private void FileDelete(string pa)
         {
@@ -251,48 +231,49 @@ namespace Converter
         private void btnDownload_Click(object sender, EventArgs e)
         {
 
-            // Lógica para iniciar o download
-            btnAdicionarURL.Enabled = false;
-            btnCancelar.Enabled = true;
-            btnPausar.Enabled = true;
-            btnContinuar.Enabled = false;
-            btnDownload.Enabled = false;
+            // Inicia o download e configura os botões
+            btnAdicionarURL.Enabled = false;   // Desabilita o botão de adicionar URL
+            btnCancelar.Enabled = true;        // Habilita o botão de cancelar
+            btnPausar.Enabled = true;          // Habilita o botão de pausar
+            btnContinuar.Enabled = false;      // Desabilita o botão de continuar
+            btnDownload.Enabled = false;       // Desabilita o botão de download
 
+            progressBar.Visible = true;        // Exibe a barra de progresso
 
-            progressBar.Visible = true;
-            if (Downloader_BackProcess.IsBusy != true)
+            // Inicia o processo de download em segundo plano
+            if (!Downloader_BackProcess.IsBusy)
                 Downloader_BackProcess.RunWorkerAsync();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            // Lógica para cancelar o download
-            btnCancelar.Enabled = false;
-            btnPausar.Enabled = false;
-            btnContinuar.Enabled = false;
-            btnDownload.Enabled = true;
+            // Cancela o download e altera os botões
+            btnCancelar.Enabled = false;   // Desabilita o botão de cancelar
+            btnPausar.Enabled = false;     // Desabilita o botão de pausar
+            btnContinuar.Enabled = false;  // Desabilita o botão de continuar
+            btnDownload.Enabled = true;    // Habilita o botão de download
 
-            cancelTokenSource.Cancel();  // Interrompe o download
-            pauseEvent.Set();  // Caso o download esteja pausado, retoma imediatamente.
+            cancelTokenSource.Cancel();    // Interrompe o download
+            pauseEvent.Set();              // Retoma imediatamente se o download estiver pausado
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
-            // Lógica para continuar o download
-            btnPausar.Enabled = true;
-            btnContinuar.Enabled = false;
+            // Continua o download
+            btnPausar.Enabled = true;      // Habilita o botão de pausar
+            btnContinuar.Enabled = false;  // Desabilita o botão de continuar
 
-            ContinuarDownload();
-            //downloader.ContinuarDownload();
-            ResumeDownload();
+            ContinuarDownload();           // Função que retoma o download
+            ResumeDownload();              // Retoma o download pausado
         }
 
         private void btnPausar_Click(object sender, EventArgs e)
         {
-            // Lógica para pausar o download
-            btnPausar.Enabled = false;
-            btnContinuar.Enabled = true;
-            pauseEvent.Reset();  // Pausa o download, bloqueando o fluxo
+            // Pausa o download
+            pauseEvent.Reset();            // Faz o download esperar
+            Status.Text = "Download pausado!";
+            Status.BackColor = System.Drawing.Color.Red;
+            btnContinuar.Enabled = true;   // Habilita o botão de continuar
         }
 
         private void cmbQuality_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,7 +294,7 @@ namespace Converter
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            btnDownload.Enabled = true;
+            btnDownload.Enabled = true;  // Habilita o botão de Download após escolher a pasta
             using (var folderDialog = new FolderBrowserDialog())
             {
                 if (folderDialog.ShowDialog() == DialogResult.OK)
@@ -322,15 +303,53 @@ namespace Converter
                     txtFilePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             }
         }
+        void PausarDownload()
+        {
+            pauseEvent.Reset(); // Faz o download esperar
+            Status.Text = "Download pausado!"; Status.BackColor = System.Drawing.Color.Red;
+        }
+
         private void ResumeDownload()
         {
             pauseEvent.Set();  // Retoma o download
         }
+        // Método para continuar o download
+        void ContinuarDownload()
+        {
+            pauseEvent.Set(); // Permite que o download continue
+            Status.Text = "Download retomado!"; Status.BackColor = System.Drawing.Color.Green;
+        }
+
+        // Método para cancelar o download
+        public void CancelarDownload()
+        {
+            cancelToken.Cancel(); // Cancela o download
+        }
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void GetVideoData(string link, bool playlist = false)
         {
             var videoData = youtube.GetAllVideos(link);
             var resolution = videoData.Where(r => r.AdaptiveKind == AdaptiveKind.Video && r.Format == VideoFormat.Mp4).
-                              Select(r => r.Resolution);
+                                       Select(r => r.Resolution);
             var bitRate = videoData.Where(r => r.AdaptiveKind == AdaptiveKind.Audio).Select(r => r.AudioBitrate);
             foreach (var item in resolution)
             {
@@ -352,101 +371,107 @@ namespace Converter
                 txtTitle.Invoke((MethodInvoker)(() => txtTitle.Text = videoData.ToList()[0].Title));
             }
             if (playlist)
-                Status.Text = videoId.Count + " Videos"; 
-               
+                Status.Text = videoId.Count + " Videos";
             else
                 Status.Text = "Single Video"; Status.BackColor = System.Drawing.Color.Green;
-        }
-
-        // Método para pausar o download
-        void PausarDownload()
-        {
-            pauseEvent.Reset(); // Faz o download esperar
-            Status.Text = "Download pausado!"; Status.BackColor = System.Drawing.Color.Red;
-        }
-
-        // Método para continuar o download
-        void ContinuarDownload()
-        {
-            pauseEvent.Set(); // Permite que o download continue
-            Status.Text = "Download retomado!";Status.BackColor = System.Drawing.Color.Green;
         }
 
         public class VideoDownloader
         {
             private CancellationTokenSource cancelToken = new CancellationTokenSource();
             private ManualResetEventSlim pauseEvent = new ManualResetEventSlim(true); // Começa sem estar pausado
+            private int collctedbytes;
+            private FrmDowload _form;
+
+            // Construtor que recebe a referência do formulário
+            public VideoDownloader(FrmDowload form)
+            {
+                _form = form;
+            }
 
             public async Task SourceDownloader(string name, YouTubeVideo vid)
             {
                 using (var client = new HttpClient())
                 {
-                    long? totalByte = 0;
+                    long? totalByte = 0;  // Inicializa a variável totalByte
                     Stream output = null;
+
                     try
                     {
+                        // Cria o arquivo para gravar os dados
                         output = new FileStream(name, FileMode.Append, FileAccess.Write, FileShare.None);
                         long existingLength = output.Length;
 
+                        // Obter o tamanho total do arquivo
                         using (var request = new HttpRequestMessage(HttpMethod.Head, vid.Uri))
                         {
                             var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                             totalByte = response.Content.Headers.ContentLength;
                         }
 
+                        // Se totalByte for zero, usa o tamanho do arquivo existente
+                        if (totalByte == 0)
+                        {
+                            totalByte = existingLength;
+                        }
+
                         using (var input = await client.GetStreamAsync(vid.Uri))
                         {
-                            byte[] buffer = new byte[16 * 1024];
+                            byte[] buffer = new byte[16 * 1024];  // Buffer de 16 KB
                             int read;
                             int totalRead = (int)existingLength;
 
                             while ((read = await input.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
+                                // Se o cancelamento for solicitado, interrompe o download
                                 if (cancelToken.Token.IsCancellationRequested)
                                 {
                                     break; // Sai do loop ao cancelar
                                 }
 
-                                pauseEvent.Wait(); // Aguarda até que o download seja retomado
+                                // Aguarda até que o download seja retomado
+                                pauseEvent.Wait();
 
+                                // Escreve os dados no arquivo
                                 output.Write(buffer, 0, read);
                                 totalRead += read;
+
+                                // Atualizando os bytes coletados
+                                collctedbytes += read;
+
+                                // Calculando o progresso (percentual)
+                                int progress = totalByte > 0 ? (int)(collctedbytes * 100 / totalByte) : 0;
+
+                                // Atualizando a barra de progresso na UI
+                                _form.Invoke((MethodInvoker)(() =>
+                                {
+                                    _form.progressBar.Value = progress;  // Atualiza o valor da barra
+                                    _form.lblProgress.Text = $"{progress}%";  // Atualiza o texto da porcentagem
+                                }));
+
+                                // Atualizando a exibição de bytes baixados
+                                _form.Invoke((MethodInvoker)(() =>
+                                {
+                                    // Usando o ByteConverter do formulário para exibir os bytes baixados
+                                    _form.Dataprogress.Text = FrmDowload.ByteConverter(collctedbytes) + "/" + FrmDowload.ByteConverter(totalByte.Value);
+                                }));
                             }
                         }
                     }
                     finally
                     {
+                        // Fecha e libera os recursos de arquivo
                         output?.Close();
                         output?.Dispose();
                     }
-
-
-
                 }
-            }
-
-            // Método para pausar o download
-            public void PausarDownload()
-            {
-                pauseEvent.Reset(); // Pausa o download
-            }
-
-            // Método para continuar o download
-            public void ContinuarDownload()
-            {
-                pauseEvent.Set(); // Retoma o download
-            }
-
-            // Método para cancelar o download
-
-            public void CancelarDownload()
-            {
-                cancelToken.Cancel(); // Cancela o download
             }
         }
 
+
         async private void Downloader_BackProcess_DoWork(object sender, DoWorkEventArgs e)
         {
+
             totalbytes = 0;
             collctedbytes = 0;
             Status.Text = "Preparando downloads..."; Status.BackColor = System.Drawing.Color.Green;
@@ -545,10 +570,10 @@ namespace Converter
                 {
                     var video = youtube.GetAllVideos(link);
                     var targetAudio = video.FirstOrDefault(r => r.AdaptiveKind == AdaptiveKind.Audio &&
-                                                                r.AudioBitrate.ToString() == selectedAudioQuality);
+                                                                 r.AudioBitrate.ToString() == selectedAudioQuality);
                     var targetVideo = video.FirstOrDefault(r => r.AdaptiveKind == AdaptiveKind.Video &&
-                                                                r.Format == VideoFormat.Mp4 &&
-                                                                r.Resolution.ToString() == selectedVideoQuality);
+                                                                 r.Format == VideoFormat.Mp4 &&
+                                                                 r.Resolution.ToString() == selectedVideoQuality);
 
                     if (targetAudio == null || (chkAudioOnly.Checked != true && targetVideo == null))
                     {
@@ -649,20 +674,15 @@ namespace Converter
                         Status.Text = "Erro no download!";
                     }
                 }
-
-
             }
 
-
-            foreach (DataGridViewRow row in DataGridViewURL.Rows)
+            // Mudança para utilizar o ListBoxURL
+            foreach (var urlItem in ListBoxURL.Items)
             {
-                if (row.Cells["URLs"].Value != null)
+                string url = urlItem.ToString().Trim();
+                if (!string.IsNullOrWhiteSpace(url))
                 {
-                    string url = row.Cells["URLs"].Value.ToString().Trim();
-                    if (!string.IsNullOrWhiteSpace(url))
-                    {
-                        urlsParaDownload.Add(url);
-                    }
+                    urlsParaDownload.Add(url);
                 }
             }
 
@@ -678,18 +698,14 @@ namespace Converter
                     return;
                 }
 
-                // Encontrar a linha correspondente ao URL e selecionar
-                DataGridViewRow selectedRow = DataGridViewURL.Rows
-                    .Cast<DataGridViewRow>()
-                    .FirstOrDefault(r => r.Cells["URLs"].Value?.ToString() == url);
-
-                if (selectedRow != null)
+                // Encontrar o índice correspondente ao URL no ListBoxURL
+                int index = ListBoxURL.Items.IndexOf(url);
+                if (index >= 0)
                 {
-                    DataGridViewURL.Invoke((MethodInvoker)(() =>
+                    ListBoxURL.Invoke((MethodInvoker)(() =>
                     {
-                        DataGridViewURL.ClearSelection();
-                        selectedRow.Selected = true;
-                        DataGridViewURL.FirstDisplayedScrollingRowIndex = selectedRow.Index;
+                        ListBoxURL.SelectedIndex = index;
+                        ListBoxURL.SelectedItem = url; // Define o item selecionado
                     }));
                 }
 
@@ -700,20 +716,6 @@ namespace Converter
                 }));
 
                 await DownloadWork(url);
-                //if (cancelToken.IsCancellationRequested)
-                //{
-                //    lblStatusContagem.Invoke((MethodInvoker)(() => lblStatusContagem.Text = "Download cancelado!"));
-                //    Status.Text = "Download interrompido!";
-                //    return;
-                //}
-
-                //videoAtual++;
-                //lblStatusContagem.Invoke((MethodInvoker)(() =>
-                //{
-                //    lblStatusContagem.Text = $"Baixando... {videoAtual}/{totalVideos}";
-                //}));
-
-                //await DownloadWork(url);
             }
 
             lblStatusContagem.Invoke((MethodInvoker)(() =>
@@ -723,9 +725,180 @@ namespace Converter
             Status.Text = "Todos os downloads concluídos!";
         }
 
+        async private Task DownloadWork(string link, bool isAudioOnly = false)
+        {
+            if (cancelTokenSource.Token.IsCancellationRequested)
+            {
+                Status.Text = "Download cancelado!";
+                return;
+            }
+
+            Status.Text = $"Baixando: {link}";
+
+            try
+            {
+                var video = youtube.GetAllVideos(link);
+                var targetAudio = video.FirstOrDefault(r => r.AdaptiveKind == AdaptiveKind.Audio);
+                var targetVideo = video.FirstOrDefault(r => r.AdaptiveKind == AdaptiveKind.Video && r.Format == VideoFormat.Mp4);
+
+                // Se o usuário selecionou baixar só o áudio
+                if (isAudioOnly)
+                {
+                    if (targetAudio == null)
+                    {
+                        MessageBox.Show("Erro: Não foi possível encontrar o áudio.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Status.Text = "Erro ao obter áudio.";
+                        return;
+                    }
+
+                    string cleanTitle = CleanFileName(video.FirstOrDefault()?.Title ?? "audio");
+                    string audioPath = Path.Combine(txtFilePath.Text, cleanTitle + "_audio.mp4");
+
+                    EnsureDirectoryExists(txtFilePath.Text);
+
+                    if (targetAudio.Uri == null)
+                    {
+                        MessageBox.Show("Erro: URL de áudio inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Status.Text = "Erro nas URLs.";
+                        return;
+                    }
+
+                    // Baixar apenas o áudio
+                    Uri audioUri = new Uri(targetAudio.Uri); // Convertendo para Uri
+                    await DownloadFile(audioUri, audioPath);
+
+                    if (cancelTokenSource.Token.IsCancellationRequested)
+                    {
+                        Status.Text = "Download cancelado!";
+                        return;
+                    }
+
+                    Status.Text = "Download de áudio concluído!";
+                }
+                else
+                {
+                    // Se o usuário não selecionou apenas o áudio, baixar vídeo e áudio
+                    if (targetAudio == null || targetVideo == null)
+                    {
+                        MessageBox.Show("Erro ao obter vídeo/áudio. Verifique a URL.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Status.Text = "Erro ao obter vídeo/áudio.";
+                        return;
+                    }
+
+                    string cleanTitle = CleanFileName(video.FirstOrDefault()?.Title ?? "video");
+                    string videoPath = Path.Combine(txtFilePath.Text, cleanTitle + "_video.mp4");
+                    string audioPath = Path.Combine(txtFilePath.Text, cleanTitle + "_audio.mp4");
+
+                    EnsureDirectoryExists(txtFilePath.Text);
+
+                    if (targetVideo.Uri == null || targetAudio.Uri == null)
+                    {
+                        MessageBox.Show("Erro: URL de vídeo ou áudio inválida.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Status.Text = "Erro nas URLs.";
+                        return;
+                    }
+
+                    // Baixar vídeo e áudio separadamente
+                    Uri videoUri = new Uri(targetVideo.Uri); // Convertendo para Uri
+                    Uri audioUri = new Uri(targetAudio.Uri); // Convertendo para Uri
+                    await DownloadFile(videoUri, videoPath);
+                    await DownloadFile(audioUri, audioPath);
+
+                    if (cancelTokenSource.Token.IsCancellationRequested)
+                    {
+                        Status.Text = "Download cancelado!";
+                        return;
+                    }
+
+                    // Combinar vídeo e áudio usando FFmpeg
+                    string outputPath = Path.Combine(txtFilePath.Text, cleanTitle + ".mp4");
+                    CombineVideoAndAudio(videoPath, audioPath, outputPath);
+
+                    // Excluir arquivos temporários de vídeo e áudio
+                    File.Delete(videoPath);
+                    File.Delete(audioPath);
+
+                    Status.Text = "Download de vídeo e áudio concluído!";
+                }
+            }
+            catch (Exception ex)
+            {
+                if (cancelTokenSource.Token.IsCancellationRequested)
+                {
+                    Status.Text = "Download cancelado!";
+                }
+                else
+                {
+                    MessageBox.Show($"Erro durante o download: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Status.Text = "Erro no download!";
+                }
+            }
+        }
+
+
+
+        async private Task DownloadFile(Uri fileUri, string outputPath)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    // Inicia o download
+                    using (var response = await client.GetAsync(fileUri, HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        response.EnsureSuccessStatusCode(); // Lança uma exceção se o status não for sucesso
+
+                        // Abertura do fluxo para escrever os dados no arquivo
+                        using (var inputStream = await response.Content.ReadAsStreamAsync())
+                        {
+                            using (var outputStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
+                            {
+                                // Copiar o conteúdo do fluxo de entrada para o fluxo de saída
+                                await inputStream.CopyToAsync(outputStream);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Erro relacionado à requisição HTTP
+                MessageBox.Show($"Erro de rede: {httpEx.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (IOException ioEx)
+            {
+                // Erro relacionado ao fluxo de dados ou ao arquivo
+                MessageBox.Show($"Erro ao gravar o arquivo: {ioEx.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                // Captura de outros erros gerais
+                MessageBox.Show($"Erro durante o download: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void CombineVideoAndAudio(string videoPath, string audioPath, string outputPath)
+        {
+            // Usando FFmpeg para combinar o vídeo e o áudio
+            string ffmpegPath = @"C:\path\to\ffmpeg.exe"; // Substitua pelo caminho correto do FFmpeg no seu sistema
+            string arguments = $"-i \"{videoPath}\" -i \"{audioPath}\" -c:v copy -c:a aac -strict experimental \"{outputPath}\"";
+
+            var process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = ffmpegPath;
+            process.StartInfo.Arguments = arguments;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+
+            process.Start();
+            process.WaitForExit();
+        }
+
+
         private void bgWorkerGetVideo_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (InvokeRequired)
+              if (InvokeRequired)
             {
                 Invoke(new MethodInvoker(() => bgWorkerGetVideo_DoWork(sender, e)));
                 return;
@@ -738,7 +911,21 @@ namespace Converter
             }
 
             videoId.Clear();
-            Status.Text = "Processing link...";
+
+            // Atualizar Status na UI thread
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    Status.ForeColor = System.Drawing.Color.Black;
+                    Status.Text = "Processing link...";
+                }));
+            }
+            else
+            {
+                Status.ForeColor = System.Drawing.Color.Black;
+                Status.Text = "Processing link...";
+            }
 
             try
             {
@@ -767,18 +954,24 @@ namespace Converter
             catch
             {
                 EmptyUrl();
-                Status.ForeColor = System.Drawing.Color.Red;
-                Status.Text = "Invalid Link";
+
+                // Atualizar Status na UI thread em caso de erro
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        Status.ForeColor = System.Drawing.Color.Red;
+                        Status.Text = "Invalid Link";
+                    }));
+                }
             }
         }
 
-        private void FrmDowload_Load(object sender, EventArgs e)
-        {            
+        private void btnLimparLista_Click(object sender, EventArgs e)
+        {
+            ListBoxURL.Items.Clear();
+            mediaPaths.Clear();            
         }
 
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
     }
 }

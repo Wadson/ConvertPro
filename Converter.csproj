@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>DownloadsICO.ico</ApplicationIcon>
+    <ApplicationIcon>Downloads %281%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -165,11 +165,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmConverterMpTreis .cs">
+    <Compile Include="FrmCompressMpTreis .cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmConverterMpTreis .Designer.cs">
-      <DependentUpon>FrmConverterMpTreis .cs</DependentUpon>
+    <Compile Include="FrmCompressMpTreis .Designer.cs">
+      <DependentUpon>FrmCompressMpTreis .cs</DependentUpon>
     </Compile>
     <Compile Include="FrmConvertPro.cs">
       <SubType>Form</SubType>
@@ -200,8 +200,8 @@
     <Compile Include="WRComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="FrmConverterMpTreis .resx">
-      <DependentUpon>FrmConverterMpTreis .cs</DependentUpon>
+    <EmbeddedResource Include="FrmCompressMpTreis .resx">
+      <DependentUpon>FrmCompressMpTreis .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmConvertPro.resx">
       <DependentUpon>FrmConvertPro.cs</DependentUpon>
@@ -305,8 +305,12 @@
     <None Include="Resources\close_inactive_24.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Downloads %281%29.ico" />
     <Content Include="DownloadsICO.ico" />
     <Content Include="LogoQuadrado.ico" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\close_24dp_EA3323_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Include="Resources\Exit24Mais.png" />
     <None Include="Resources\Compressor.jpeg" />
     <None Include="Resources\Conversor.jpeg" />
     <None Include="Resources\Downlo.jpeg" />

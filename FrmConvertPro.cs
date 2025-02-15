@@ -56,7 +56,7 @@ namespace Converter
 
         private void btnConverterMpTreis_Click(object sender, EventArgs e)
         {
-            AbrirFormEnPanel(new FrmConverterMpTreis());           
+            AbrirFormEnPanel(new FrmCompressMpTreis());           
         }
     }
 }
