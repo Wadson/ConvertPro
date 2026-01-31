@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Resources\ConvertPro.ico</ApplicationIcon>
+    <PackageIcon>LogoConvertPro.png</PackageIcon>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\ConvertPro.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="WindowsAPICodePack" Version="8.0.14" />
+    <PackageReference Include="WindowsAPICodePackShell" Version="8.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AngleSharp">
+      <HintPath>..\Converter-Funcional\bin\Debug\net10.0-windows\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FFMpegCore">
+      <HintPath>..\Converter-Funcional\bin\Debug\net10.0-windows\FFMpegCore.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp">
+      <HintPath>..\Converter-Funcional\bin\Debug\net10.0-windows\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Krypton.Toolkit">
+      <HintPath>D:\GVC\bin\Release\net10.0-windows7.0\Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.VideoConverter">
+      <HintPath>..\Converter-Funcional\bin\Debug\net10.0-windows\NReco.VideoConverter.dll</HintPath>
+    </Reference>
+    <Reference Include="YoutubeExplode">
+      <HintPath>..\Converter-Funcional\bin\Debug\net10.0-windows\YoutubeExplode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="FrmConverterMpQuatro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmCompressMpTreis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FrmDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\LogoConvertPro.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

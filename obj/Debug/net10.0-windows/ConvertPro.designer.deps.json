@@ -1,0 +1,96 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "FontAwesome.Sharp/6.3.0": {
+        "runtime": {
+          "lib/net6.0-windows7.0/FontAwesome.Sharp.dll": {
+            "assemblyVersion": "6.3.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
+      "WindowsAPICodePack/8.0.14": {
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Sensors.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ShellExtensions.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          }
+        }
+      },
+      "WindowsAPICodePackCore/8.0.14": {
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          }
+        }
+      },
+      "WindowsAPICodePackShell/8.0.14": {
+        "dependencies": {
+          "WindowsAPICodePackCore": "8.0.14"
+        },
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FontAwesome.Sharp/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3/Fb0N04yYK8An07oox5ISlUyNgsnWildHfoP69uqTEOsemQemRyciphMkXZOcdBupjUD+lVsRE3FqG41/dzPA==",
+      "path": "fontawesome.sharp/6.3.0",
+      "hashPath": "fontawesome.sharp.6.3.0.nupkg.sha512"
+    },
+    "WindowsAPICodePack/8.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dNvG8hCE7LhCAcI7kCRDiOax0T8OJZVPEUrnMPQzJOTRAo8p1/AOWau2FKKvWRBOQXO/QQUX0gTZEJ1G2lAnfw==",
+      "path": "windowsapicodepack/8.0.14",
+      "hashPath": "windowsapicodepack.8.0.14.nupkg.sha512"
+    },
+    "WindowsAPICodePackCore/8.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dQdoXIezx7djiSdDp9Gwl/UtwUGp1m+lPtGP1xF3+AvT7SfPm5y9abPU4FZatrevd5IY/jV/uguHTlkjO+Tcyw==",
+      "path": "windowsapicodepackcore/8.0.14",
+      "hashPath": "windowsapicodepackcore.8.0.14.nupkg.sha512"
+    },
+    "WindowsAPICodePackShell/8.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2q0+fNuqItg7oyhKIj+5CZwAcG8am8WWf8sha8vOlXvyE1V10IztKjvzCsUYRDvq0nEKGytK4V9rCkMh5VnzLA==",
+      "path": "windowsapicodepackshell/8.0.14",
+      "hashPath": "windowsapicodepackshell.8.0.14.nupkg.sha512"
+    }
+  }
+}

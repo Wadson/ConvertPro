@@ -1,0 +1,160 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ConvertPro/1.0.0": {
+        "dependencies": {
+          "FontAwesome.Sharp": "6.3.0",
+          "WindowsAPICodePack": "8.0.14",
+          "AngleSharp": "1.3.0.0",
+          "FFMpegCore": "5.0.0.0",
+          "Krypton.Toolkit": "70.22.11.312",
+          "NReco.VideoConverter": "1.2.1.0",
+          "YoutubeExplode": "6.5.6.0"
+        },
+        "runtime": {
+          "ConvertPro.dll": {}
+        }
+      },
+      "FontAwesome.Sharp/6.3.0": {
+        "runtime": {
+          "lib/net6.0-windows7.0/FontAwesome.Sharp.dll": {
+            "assemblyVersion": "6.3.0.0",
+            "fileVersion": "6.3.0.0"
+          }
+        }
+      },
+      "WindowsAPICodePack/8.0.14": {
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Sensors.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ShellExtensions.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.dll": {
+            "assemblyVersion": "8.0.14.0",
+            "fileVersion": "8.0.14.0"
+          }
+        }
+      },
+      "AngleSharp/1.3.0.0": {
+        "runtime": {
+          "AngleSharp.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.0.0"
+          }
+        }
+      },
+      "FFMpegCore/5.0.0.0": {
+        "runtime": {
+          "FFMpegCore.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
+      "Krypton.Toolkit/70.22.11.312": {
+        "runtime": {
+          "Krypton.Toolkit.dll": {
+            "assemblyVersion": "70.22.11.312",
+            "fileVersion": "70.22.11.312"
+          }
+        }
+      },
+      "NReco.VideoConverter/1.2.1.0": {
+        "runtime": {
+          "NReco.VideoConverter.dll": {
+            "assemblyVersion": "1.2.1.0",
+            "fileVersion": "1.2.1.0"
+          }
+        }
+      },
+      "YoutubeExplode/6.5.6.0": {
+        "runtime": {
+          "YoutubeExplode.dll": {
+            "assemblyVersion": "6.5.6.0",
+            "fileVersion": "6.5.6.0"
+          }
+        }
+      },
+      "Instances/1.0.0.0": {
+        "runtime": {
+          "Instances.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConvertPro/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FontAwesome.Sharp/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3/Fb0N04yYK8An07oox5ISlUyNgsnWildHfoP69uqTEOsemQemRyciphMkXZOcdBupjUD+lVsRE3FqG41/dzPA==",
+      "path": "fontawesome.sharp/6.3.0",
+      "hashPath": "fontawesome.sharp.6.3.0.nupkg.sha512"
+    },
+    "WindowsAPICodePack/8.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dNvG8hCE7LhCAcI7kCRDiOax0T8OJZVPEUrnMPQzJOTRAo8p1/AOWau2FKKvWRBOQXO/QQUX0gTZEJ1G2lAnfw==",
+      "path": "windowsapicodepack/8.0.14",
+      "hashPath": "windowsapicodepack.8.0.14.nupkg.sha512"
+    },
+    "AngleSharp/1.3.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FFMpegCore/5.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Krypton.Toolkit/70.22.11.312": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NReco.VideoConverter/1.2.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YoutubeExplode/6.5.6.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Instances/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
