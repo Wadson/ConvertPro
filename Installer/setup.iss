@@ -1,5 +1,5 @@
 #define MyAppName "ConvertPro"
-#define MyAppVersion "1.5.0"
+#define MyAppVersion "2.0.0"
 #define MyAppPublisher "WR Soft Serviços, Inc."
 #define MyAppExeName "ConvertPro.exe"
 
@@ -12,6 +12,13 @@ DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 SetupIconFile=Resources\ConvertPro.ico
+LicenseFile=License_ConvertPro.txt
+
+
+
+
+
+DisableWelcomePage=no
 
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
@@ -44,6 +51,12 @@ Flags: recursesubdirs createallsubdirs ignoreversion
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+
+[Messages]
+LicenseAgreementLabel=Contrato de Licença do ConvertPro
+LicenseAgreementTitle=Licença de Uso – ConvertPro
+
+
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; \

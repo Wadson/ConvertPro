@@ -213,7 +213,7 @@
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar.Location = new Point(-11, 376);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(569, 23);
+            progressBar.Size = new Size(561, 23);
             progressBar.TabIndex = 1033;
             progressBar.UseKrypton = true;
             // 
@@ -287,7 +287,7 @@
             lblStatusContagem.BackColor = Color.Transparent;
             lblStatusContagem.Font = new Font("Microsoft Sans Serif", 10F);
             lblStatusContagem.ForeColor = Color.FromArgb(6, 128, 254);
-            lblStatusContagem.Location = new Point(63, 295);
+            lblStatusContagem.Location = new Point(137, 295);
             lblStatusContagem.Margin = new Padding(4, 0, 4, 0);
             lblStatusContagem.Name = "lblStatusContagem";
             lblStatusContagem.Size = new Size(13, 17);
@@ -452,6 +452,7 @@
             // 
             cmbAudioQuality.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cmbAudioQuality.CornerRoundingRadius = 20F;
+            cmbAudioQuality.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAudioQuality.DropDownWidth = 185;
             cmbAudioQuality.IntegralHeight = false;
             cmbAudioQuality.Location = new Point(481, 295);
@@ -478,6 +479,9 @@
             cmbAudioQuality.StateCommon.ComboBox.Content.Color1 = Color.White;
             cmbAudioQuality.StateCommon.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbAudioQuality.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            cmbAudioQuality.StateCommon.DropBack.Color1 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateCommon.DropBack.Color2 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateCommon.Item.Back.Color1 = Color.Orange;
             cmbAudioQuality.StateCommon.Item.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbAudioQuality.StateCommon.Item.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateCommon.Item.Border.ColorAngle = 45F;
@@ -488,7 +492,6 @@
             cmbAudioQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateNormal.ComboBox.Content.Color1 = Color.White;
             cmbAudioQuality.TabIndex = 1046;
-            cmbAudioQuality.Text = " ";
             // 
             // lblAudioQuality
             // 

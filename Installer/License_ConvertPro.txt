@@ -1,0 +1,62 @@
+LICENÇA PROPRIETÁRIA – CONVERTPRO
+
+Copyright © 2026 WR Soft Serviços, Inc.
+Todos os direitos reservados.
+
+Este software, denominado "ConvertPro", é protegido por leis de direitos
+autorais e tratados internacionais. A titularidade e todos os direitos
+sobre o software pertencem exclusivamente à WR Soft Serviços, Inc.
+
+1. CONCESSÃO DE LICENÇA
+É concedida ao usuário final uma licença limitada, não exclusiva,
+intransferível e revogável para instalar e utilizar o software ConvertPro
+apenas para fins pessoais ou comerciais internos, de acordo com os termos
+desta licença.
+
+2. RESTRIÇÕES
+É expressamente proibido ao usuário, sem autorização prévia e por escrito
+da WR Soft Serviços, Inc.:
+
+a) Copiar, reproduzir, distribuir, sublicenciar, vender, alugar ou ceder
+   o software, total ou parcialmente;
+b) Modificar, adaptar, traduzir, realizar engenharia reversa, descompilar
+   ou desmontar o software;
+c) Remover, alterar ou ocultar avisos de direitos autorais, marcas ou
+   outras notificações de propriedade;
+d) Utilizar o software para fins ilegais ou não autorizados pela legislação
+   vigente.
+
+3. ATUALIZAÇÕES E SUPORTE
+A WR Soft Serviços, Inc. poderá, a seu exclusivo critério, fornecer
+atualizações, correções ou melhorias, sem a obrigação de fazê-lo.
+Esta licença não garante suporte técnico contínuo, salvo acordo expresso
+em contrário.
+
+4. ISENÇÃO DE GARANTIAS
+O software é fornecido "NO ESTADO EM QUE SE ENCONTRA", sem garantias de
+qualquer tipo, expressas ou implícitas, incluindo, mas não se limitando,
+às garantias de comercialização, adequação a uma finalidade específica
+ou não violação de direitos de terceiros.
+
+5. LIMITAÇÃO DE RESPONSABILIDADE
+Em nenhuma hipótese a WR Soft Serviços, Inc. será responsável por danos
+diretos, indiretos, incidentais, especiais, consequenciais ou punitivos,
+incluindo, sem limitação, perda de lucros, perda de dados ou interrupção
+de negócios, decorrentes do uso ou da incapacidade de uso do software.
+
+6. RESCISÃO
+Esta licença será rescindida automaticamente caso o usuário viole
+qualquer cláusula deste contrato. Em caso de rescisão, o usuário deverá
+cessar imediatamente o uso do software e remover todas as cópias
+instaladas.
+
+7. LEGISLAÇÃO APLICÁVEL
+Este contrato será regido e interpretado de acordo com as leis da
+República Federativa do Brasil.
+
+8. DISPOSIÇÕES FINAIS
+A utilização do software implica na aceitação integral e irrestrita dos
+termos desta licença. Caso qualquer disposição seja considerada inválida
+ou inexequível, as demais permanecerão em pleno vigor e efeito.
+
+ConvertPro é um produto de propriedade exclusiva da WR Soft Serviços, Inc.

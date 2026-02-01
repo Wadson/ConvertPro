@@ -259,6 +259,7 @@
             // cmbVideoQuality
             // 
             cmbVideoQuality.CornerRoundingRadius = 20F;
+            cmbVideoQuality.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVideoQuality.DropDownWidth = 185;
             cmbVideoQuality.IntegralHeight = false;
             cmbVideoQuality.Location = new Point(95, 151);
@@ -282,9 +283,12 @@
             cmbVideoQuality.StateCommon.ComboBox.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
             cmbVideoQuality.StateCommon.ComboBox.Border.Rounding = 20F;
             cmbVideoQuality.StateCommon.ComboBox.Border.Width = 1;
-            cmbVideoQuality.StateCommon.ComboBox.Content.Color1 = Color.White;
+            cmbVideoQuality.StateCommon.ComboBox.Content.Color1 = Color.FromArgb(8, 142, 254);
             cmbVideoQuality.StateCommon.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbVideoQuality.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            cmbVideoQuality.StateCommon.DropBack.Color1 = Color.FromArgb(8, 142, 254);
+            cmbVideoQuality.StateCommon.DropBack.Color2 = Color.FromArgb(8, 142, 254);
+            cmbVideoQuality.StateCommon.Item.Back.Color1 = Color.Orange;
             cmbVideoQuality.StateCommon.Item.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbVideoQuality.StateCommon.Item.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbVideoQuality.StateCommon.Item.Border.ColorAngle = 45F;
@@ -295,7 +299,6 @@
             cmbVideoQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
             cmbVideoQuality.StateNormal.ComboBox.Content.Color1 = Color.White;
             cmbVideoQuality.TabIndex = 1021;
-            cmbVideoQuality.Text = " ";
             cmbVideoQuality.SelectedIndexChanged += cmbVideoQuality_SelectedIndexChanged;
             // 
             // lblVideoQuality
@@ -323,6 +326,7 @@
             // cmbAudioQuality
             // 
             cmbAudioQuality.CornerRoundingRadius = 20F;
+            cmbAudioQuality.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAudioQuality.DropDownWidth = 185;
             cmbAudioQuality.IntegralHeight = false;
             cmbAudioQuality.Location = new Point(363, 151);
@@ -349,6 +353,9 @@
             cmbAudioQuality.StateCommon.ComboBox.Content.Color1 = Color.White;
             cmbAudioQuality.StateCommon.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbAudioQuality.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            cmbAudioQuality.StateCommon.DropBack.Color1 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateCommon.DropBack.Color2 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateCommon.Item.Back.Color1 = Color.Orange;
             cmbAudioQuality.StateCommon.Item.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbAudioQuality.StateCommon.Item.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateCommon.Item.Border.ColorAngle = 45F;
@@ -359,7 +366,6 @@
             cmbAudioQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateNormal.ComboBox.Content.Color1 = Color.White;
             cmbAudioQuality.TabIndex = 1023;
-            cmbAudioQuality.Text = " ";
             cmbAudioQuality.SelectedIndexChanged += cmbAudioQuality_SelectedIndexChanged;
             // 
             // chkAudioOnly
@@ -480,7 +486,7 @@
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             progressBar.Location = new Point(57, 336);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(569, 23);
+            progressBar.Size = new Size(561, 23);
             progressBar.TabIndex = 1033;
             progressBar.UseKrypton = true;
             // 
@@ -571,7 +577,7 @@
             lblStatusContagem.BackColor = Color.Transparent;
             lblStatusContagem.Font = new Font("Microsoft Sans Serif", 10F);
             lblStatusContagem.ForeColor = Color.FromArgb(8, 142, 254);
-            lblStatusContagem.Location = new Point(88, 371);
+            lblStatusContagem.Location = new Point(137, 371);
             lblStatusContagem.Margin = new Padding(4, 0, 4, 0);
             lblStatusContagem.Name = "lblStatusContagem";
             lblStatusContagem.Size = new Size(13, 17);

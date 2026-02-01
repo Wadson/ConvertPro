@@ -210,13 +210,14 @@
             // 
             // lblVersaoSistema
             // 
-            lblVersaoSistema.Location = new Point(6, 454);
+            lblVersaoSistema.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            lblVersaoSistema.Location = new Point(6, 484);
             lblVersaoSistema.Name = "lblVersaoSistema";
-            lblVersaoSistema.Size = new Size(108, 52);
+            lblVersaoSistema.Size = new Size(249, 20);
             lblVersaoSistema.StateCommon.ShortText.Color1 = Color.FromArgb(32, 30, 45);
             lblVersaoSistema.StateCommon.ShortText.Color2 = Color.FromArgb(32, 30, 45);
             lblVersaoSistema.TabIndex = 2;
-            lblVersaoSistema.Values.Text = "ConvertPro\r\n• Versão 1.2.3\r\n• © 2026 WR Soft\r\n";
+            lblVersaoSistema.Values.Text = "ConvertPro • Versão 1.2.3 • © 2026 WR Soft\r\n";
             // 
             // picLogoCentro
             // 

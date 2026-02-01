@@ -46,8 +46,6 @@
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnPausar = new FontAwesome.Sharp.IconButton();
             btnContinuar = new FontAwesome.Sharp.IconButton();
-            lblStatusContagem = new Label();
-            lblTotalLinks = new Label();
             statusStrip1 = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
             panel1 = new Panel();
@@ -137,6 +135,7 @@
             // 
             cmbNivelCompressao.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             cmbNivelCompressao.CornerRoundingRadius = 20F;
+            cmbNivelCompressao.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbNivelCompressao.DropDownWidth = 185;
             cmbNivelCompressao.IntegralHeight = false;
             cmbNivelCompressao.Location = new Point(207, 299);
@@ -163,6 +162,9 @@
             cmbNivelCompressao.StateCommon.ComboBox.Content.Color1 = Color.White;
             cmbNivelCompressao.StateCommon.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbNivelCompressao.StateCommon.ComboBox.Content.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            cmbNivelCompressao.StateCommon.DropBack.Color1 = Color.FromArgb(8, 142, 254);
+            cmbNivelCompressao.StateCommon.DropBack.Color2 = Color.FromArgb(8, 142, 254);
+            cmbNivelCompressao.StateCommon.Item.Back.Color1 = Color.Orange;
             cmbNivelCompressao.StateCommon.Item.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbNivelCompressao.StateCommon.Item.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbNivelCompressao.StateCommon.Item.Border.ColorAngle = 45F;
@@ -173,7 +175,6 @@
             cmbNivelCompressao.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
             cmbNivelCompressao.StateNormal.ComboBox.Content.Color1 = Color.White;
             cmbNivelCompressao.TabIndex = 1021;
-            cmbNivelCompressao.Text = " ";
             // 
             // lblVideoQuality
             // 
@@ -353,34 +354,6 @@
             btnContinuar.UseVisualStyleBackColor = true;
             btnContinuar.Click += btnContinuar_Click;
             // 
-            // lblStatusContagem
-            // 
-            lblStatusContagem.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lblStatusContagem.AutoSize = true;
-            lblStatusContagem.BackColor = Color.Transparent;
-            lblStatusContagem.Font = new Font("Microsoft Sans Serif", 10F);
-            lblStatusContagem.ForeColor = Color.FromArgb(8, 142, 254);
-            lblStatusContagem.Location = new Point(603, 308);
-            lblStatusContagem.Margin = new Padding(4, 0, 4, 0);
-            lblStatusContagem.Name = "lblStatusContagem";
-            lblStatusContagem.Size = new Size(13, 17);
-            lblStatusContagem.TabIndex = 1039;
-            lblStatusContagem.Text = "-";
-            // 
-            // lblTotalLinks
-            // 
-            lblTotalLinks.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lblTotalLinks.AutoSize = true;
-            lblTotalLinks.BackColor = Color.Transparent;
-            lblTotalLinks.Font = new Font("Microsoft Sans Serif", 10F);
-            lblTotalLinks.ForeColor = Color.FromArgb(6, 128, 254);
-            lblTotalLinks.Location = new Point(572, 308);
-            lblTotalLinks.Margin = new Padding(4, 0, 4, 0);
-            lblTotalLinks.Name = "lblTotalLinks";
-            lblTotalLinks.Size = new Size(28, 17);
-            lblTotalLinks.TabIndex = 1040;
-            lblTotalLinks.Text = "0/0";
-            // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
@@ -489,7 +462,7 @@
             lblTotalVideos.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblTotalVideos.AutoSize = true;
             lblTotalVideos.ForeColor = Color.FromArgb(6, 128, 254);
-            lblTotalVideos.Location = new Point(444, 309);
+            lblTotalVideos.Location = new Point(548, 306);
             lblTotalVideos.Margin = new Padding(4, 0, 4, 0);
             lblTotalVideos.Name = "lblTotalVideos";
             lblTotalVideos.Size = new Size(68, 15);
@@ -524,8 +497,6 @@
             Controls.Add(btnOpenAudio);
             Controls.Add(panel1);
             Controls.Add(statusStrip1);
-            Controls.Add(lblStatusContagem);
-            Controls.Add(lblTotalLinks);
             Controls.Add(btnContinuar);
             Controls.Add(btnPausar);
             Controls.Add(btnCancelar);
@@ -578,8 +549,6 @@
         private FontAwesome.Sharp.IconButton btnCancelar;
         private FontAwesome.Sharp.IconButton btnPausar;
         private FontAwesome.Sharp.IconButton btnContinuar;
-        private Label lblStatusContagem;
-        private Label lblTotalLinks;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblStatus;
         private Panel panel1;
