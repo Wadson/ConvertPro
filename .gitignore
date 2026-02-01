@@ -1,0 +1,18 @@
+# Build
+bin/
+obj/
+
+# Publish / Installer
+Installer/Output/
+**/publish/
+
+# Executáveis grandes
+ffmpeg.exe
+yt-dlp.exe
+*.exe
+
+# Debug / Release
+*.pdb
+
+# Logs / temporários
+*.log
