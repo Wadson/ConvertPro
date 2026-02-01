@@ -53,17 +53,17 @@
             btnExcluirSelecionados = new FontAwesome.Sharp.IconButton();
             btnLimparLista = new FontAwesome.Sharp.IconButton();
             lblAnalisando = new Label();
-            progressBar = new Krypton.Toolkit.KryptonProgressBar();
-            lblProgress = new Krypton.Toolkit.KryptonLabel();
+            progressBarVideo = new Krypton.Toolkit.KryptonProgressBar();
             btnDownload = new FontAwesome.Sharp.IconButton();
             btnCancelar = new FontAwesome.Sharp.IconButton();
             btnPausar = new FontAwesome.Sharp.IconButton();
             btnContinuar = new FontAwesome.Sharp.IconButton();
-            lblStatusContagem = new Label();
-            lblTotalLinks = new Label();
             statusStrip1 = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
             toolTip1 = new ToolTip(components);
+            progressBarTotal = new Krypton.Toolkit.KryptonProgressBar();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            lblStatusContagem = new ToolStripStatusLabel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cmbVideoQuality).BeginInit();
@@ -411,7 +411,7 @@
             ListBoxURL.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ListBoxURL.Location = new Point(57, 234);
             ListBoxURL.Name = "ListBoxURL";
-            ListBoxURL.Size = new Size(569, 96);
+            ListBoxURL.Size = new Size(569, 88);
             ListBoxURL.TabIndex = 1028;
             // 
             // btnBrowse
@@ -473,7 +473,7 @@
             lblAnalisando.BackColor = Color.FromArgb(170, 204, 255);
             lblAnalisando.Font = new Font("Microsoft Sans Serif", 12F);
             lblAnalisando.ForeColor = Color.Silver;
-            lblAnalisando.Location = new Point(82, 274);
+            lblAnalisando.Location = new Point(266, 260);
             lblAnalisando.Margin = new Padding(4, 0, 4, 0);
             lblAnalisando.Name = "lblAnalisando";
             lblAnalisando.Size = new Size(100, 20);
@@ -481,26 +481,14 @@
             lblAnalisando.Text = "Analisando...";
             lblAnalisando.Visible = false;
             // 
-            // progressBar
+            // progressBarVideo
             // 
-            progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar.Location = new Point(57, 336);
-            progressBar.Name = "progressBar";
-            progressBar.Size = new Size(561, 23);
-            progressBar.TabIndex = 1033;
-            progressBar.UseKrypton = true;
-            // 
-            // lblProgress
-            // 
-            lblProgress.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lblProgress.Location = new Point(624, 338);
-            lblProgress.Name = "lblProgress";
-            lblProgress.Size = new Size(39, 21);
-            lblProgress.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
-            lblProgress.StateCommon.ShortText.Color2 = Color.FromArgb(6, 128, 254);
-            lblProgress.StateCommon.ShortText.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblProgress.TabIndex = 1034;
-            lblProgress.Values.Text = "0,0%";
+            progressBarVideo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            progressBarVideo.Location = new Point(57, 341);
+            progressBarVideo.Name = "progressBarVideo";
+            progressBarVideo.Size = new Size(561, 10);
+            progressBarVideo.TabIndex = 1033;
+            progressBarVideo.UseKrypton = true;
             // 
             // btnDownload
             // 
@@ -570,37 +558,9 @@
             btnContinuar.UseVisualStyleBackColor = true;
             btnContinuar.Click += btnContinuar_Click;
             // 
-            // lblStatusContagem
-            // 
-            lblStatusContagem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblStatusContagem.AutoSize = true;
-            lblStatusContagem.BackColor = Color.Transparent;
-            lblStatusContagem.Font = new Font("Microsoft Sans Serif", 10F);
-            lblStatusContagem.ForeColor = Color.FromArgb(8, 142, 254);
-            lblStatusContagem.Location = new Point(137, 371);
-            lblStatusContagem.Margin = new Padding(4, 0, 4, 0);
-            lblStatusContagem.Name = "lblStatusContagem";
-            lblStatusContagem.Size = new Size(13, 17);
-            lblStatusContagem.TabIndex = 1039;
-            lblStatusContagem.Text = "-";
-            // 
-            // lblTotalLinks
-            // 
-            lblTotalLinks.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            lblTotalLinks.AutoSize = true;
-            lblTotalLinks.BackColor = Color.Transparent;
-            lblTotalLinks.Font = new Font("Microsoft Sans Serif", 10F);
-            lblTotalLinks.ForeColor = Color.Silver;
-            lblTotalLinks.Location = new Point(57, 371);
-            lblTotalLinks.Margin = new Padding(4, 0, 4, 0);
-            lblTotalLinks.Name = "lblTotalLinks";
-            lblTotalLinks.Size = new Size(28, 17);
-            lblTotalLinks.TabIndex = 1040;
-            lblTotalLinks.Text = "0/0";
-            // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus, toolStripStatusLabel1, lblStatusContagem });
             statusStrip1.Location = new Point(0, 402);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.RenderMode = ToolStripRenderMode.Professional;
@@ -614,21 +574,41 @@
             lblStatus.Size = new Size(39, 17);
             lblStatus.Text = "Status";
             // 
+            // progressBarTotal
+            // 
+            progressBarTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            progressBarTotal.Location = new Point(57, 328);
+            progressBarTotal.Name = "progressBarTotal";
+            progressBarTotal.Size = new Size(561, 10);
+            progressBarTotal.Style = ProgressBarStyle.Continuous;
+            progressBarTotal.TabIndex = 1042;
+            progressBarTotal.UseKrypton = true;
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(10, 17);
+            toolStripStatusLabel1.Text = "|";
+            // 
+            // lblStatusContagem
+            // 
+            lblStatusContagem.Name = "lblStatusContagem";
+            lblStatusContagem.Size = new Size(98, 17);
+            lblStatusContagem.Text = "Status Contagem";
+            // 
             // FrmDownload
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(252, 252, 252);
             ClientSize = new Size(683, 424);
+            Controls.Add(progressBarTotal);
             Controls.Add(statusStrip1);
-            Controls.Add(lblStatusContagem);
-            Controls.Add(lblTotalLinks);
             Controls.Add(btnContinuar);
             Controls.Add(btnPausar);
             Controls.Add(btnCancelar);
             Controls.Add(btnDownload);
-            Controls.Add(lblProgress);
-            Controls.Add(progressBar);
+            Controls.Add(progressBarVideo);
             Controls.Add(lblAnalisando);
             Controls.Add(btnExcluirSelecionados);
             Controls.Add(btnLimparLista);
@@ -691,17 +671,17 @@
         private FontAwesome.Sharp.IconButton btnExcluirSelecionados;
         private FontAwesome.Sharp.IconButton btnLimparLista;
         private Label lblAnalisando;
-        private Krypton.Toolkit.KryptonProgressBar progressBar;
-        private Krypton.Toolkit.KryptonLabel lblProgress;
+        private Krypton.Toolkit.KryptonProgressBar progressBarVideo;
         private FontAwesome.Sharp.IconButton btnDownload;
         private FontAwesome.Sharp.IconButton btnCancelar;
         private FontAwesome.Sharp.IconButton btnPausar;
         private FontAwesome.Sharp.IconButton btnContinuar;
-        private Label lblStatusContagem;
-        private Label lblTotalLinks;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lblStatus;
         private FontAwesome.Sharp.IconButton btnSair;
         private ToolTip toolTip1;
+        private Krypton.Toolkit.KryptonProgressBar progressBarTotal;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel lblStatusContagem;
     }
 }

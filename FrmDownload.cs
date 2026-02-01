@@ -45,6 +45,17 @@ namespace ConvertPro
             InitializeComponent();
             InitializeForm();
             this.Shown += (s, e) => AplicarPlaceholderUrl();
+
+
+            progressBarTotal.Minimum = 0;
+            progressBarTotal.Maximum = expandedList.Count;
+            progressBarTotal.Value = 0;
+            progressBarTotal.Style = ProgressBarStyle.Continuous;
+            progressBarVideo.Minimum = 0;
+            progressBarVideo.Maximum = 100;
+            progressBarVideo.Value = 0;
+            progressBarVideo.Style = ProgressBarStyle.Continuous;
+
         }
         private bool UrlJaExisteNaFila(string url)
         {
@@ -144,8 +155,7 @@ namespace ConvertPro
                 Directory.CreateDirectory(txtFilePath.Text);
 
             ListBoxURL.DataSource = expandedList;
-
-            AtualizarTotalLinks();
+           
             AtualizarBotoes();
 
             // ====== VALIDAÇÃO MAIS ROBUSTA DOS EXECUTÁVEIS ======
@@ -166,12 +176,6 @@ namespace ConvertPro
             btnLimparLista.Enabled = false;
             AtualizarBotoes();
         }
-
-        private void AtualizarTotalLinks()
-        {
-            lblTotalLinks.Text = $"Total: {expandedList.Count}";
-        }
-
 
         private void AtualizarBotoes()
         {
@@ -387,47 +391,59 @@ namespace ConvertPro
 
         private async Task DownloadAllAsync(CancellationToken cancellationToken)
         {
-            // total geral
-            int totalCount = expandedList.Count;
+            var videos = expandedList.OfType<PlaylistVideo>().ToList();
+            int totalCount = videos.Count;
 
-            // construir mapa de totais por playlistKey (use "__NO_PLAYLIST__" para avulsos)
+            // Totais por playlist
             var playlistTotals = new Dictionary<string, int>();
-            for (int i = 0; i < expandedList.Count; i++)
+            foreach (var v in videos)
             {
-                if (expandedList[i] is PlaylistVideo pv)
-                {
-                    string key = string.IsNullOrEmpty(pv.PlaylistTitle) ? "__NO_PLAYLIST__" : pv.PlaylistTitle;
-                    if (!playlistTotals.ContainsKey(key)) playlistTotals[key] = 0;
-                    playlistTotals[key]++;
-                }
+                string key = string.IsNullOrEmpty(v.PlaylistTitle) ? "__NO_PLAYLIST__" : v.PlaylistTitle;
+                if (!playlistTotals.ContainsKey(key))
+                    playlistTotals[key] = 0;
+
+                playlistTotals[key]++;
             }
 
-            // trackers por playlist
-            var playlistProgress = playlistTotals.ToDictionary(kvp => kvp.Key, kvp => 0);
+            var playlistProgress = playlistTotals.ToDictionary(k => k.Key, _ => 0);
 
-            for (int i = 0; i < expandedList.Count; i++)
+            Invoke((MethodInvoker)(() =>
             {
-                if (cancellationToken.IsCancellationRequested) break;
+                progressBarTotal.Minimum = 0;
+                progressBarTotal.Maximum = totalCount;
+                progressBarTotal.Value = 0;
+            }));
 
-                var video = expandedList[i] as PlaylistVideo;
-                if (video == null) continue;
+            for (int i = 0; i < videos.Count; i++)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                    break;
 
-                // atualiza índices por playlist
+                var video = videos[i];
+
+                // ⏭️ pula vídeos já concluídos
+                if (video.Status == StatusVideo.Concluido)
+                {
+                    Invoke((MethodInvoker)(() =>
+                    {
+                        progressBarTotal.Value++;
+                    }));
+                    continue;
+                }
+
                 string key = string.IsNullOrEmpty(video.PlaylistTitle) ? "__NO_PLAYLIST__" : video.PlaylistTitle;
-                playlistProgress[key]++;
 
-                int currentInPlaylist = playlistProgress[key];
-                int totalInPlaylist = playlistTotals.ContainsKey(key) ? playlistTotals[key] : 1;
+                int currentInPlaylist = playlistProgress[key] + 1;
+                int totalInPlaylist = playlistTotals[key];
 
-                ListBoxURL.SelectedIndex = i;
+                ListBoxURL.SelectedIndex = expandedList.IndexOf(video);
 
                 Invoke((MethodInvoker)(() =>
                 {
-                    // exibe progresso geral e por playlist no mesmo rótulo
                     lblStatusContagem.Text = $"{i + 1}/{totalCount}";
                     string playlistLabel = key == "__NO_PLAYLIST__" ? "Avulsos" : key;
-                    lblStatus.Text = $"📥 Preparando {i + 1}/{totalCount} — [{playlistLabel} {currentInPlaylist}/{totalInPlaylist}]";
-                    progressBar.Value = 0;
+                    lblStatus.Text = $"📥 Baixando — [{playlistLabel} {currentInPlaylist}/{totalInPlaylist}]";
+                    progressBarVideo.Value = 0;
                 }));
 
                 try
@@ -436,100 +452,86 @@ namespace ConvertPro
                     ListBoxURL.Refresh();
 
                     await DownloadVideoAsync(video, i + 1, totalCount, cancellationToken);
+
+                    // ✅ sucesso
+                    video.Status = StatusVideo.Concluido;
+                    playlistProgress[key]++;
+                    ListBoxURL.Refresh();
+
+                    Invoke((MethodInvoker)(() =>
+                    {
+                        progressBarTotal.Value++;
+                    }));
                 }
                 catch (Exception ex)
                 {
                     video.Status = StatusVideo.Erro;
                     ListBoxURL.Refresh();
 
-                    // 🔁 pula vídeo quebrado e continua o lote
                     Invoke((MethodInvoker)(() =>
                     {
-                        lblStatus.Text = $"⚠️ Pulado: {video.Title}";
+                        lblStatus.Text = $"❌ Erro: {video.Title}";
                         lblStatus.BackColor = Color.DarkOrange;
                     }));
 
-                    // log para diagnóstico
-                    Console.WriteLine($"[SKIPPED] {video.Url}");
+                    Console.WriteLine($"[ERROR] {video.Url}");
                     Console.WriteLine(ex.Message);
 
-                    // pequena pausa para evitar throttling
                     await Task.Delay(1500, cancellationToken);
-                   
-                }              
-
-                if (cancellationToken.IsCancellationRequested)
-                    break;
-
+                }
             }
         }
 
+
         private async Task DownloadVideoAsync(
-    PlaylistVideo video,
-    int current,
-    int total,
-    CancellationToken cancellationToken)
+     PlaylistVideo video,
+     int current,
+     int total,
+     CancellationToken cancellationToken)
         {
+            // 🔹 Reset visual do progresso do vídeo
+            Invoke((MethodInvoker)(() =>
+            {
+                progressBarVideo.Value = 0;               
+            }));
+
             string outputDir = txtFilePath.Text;
 
-            // Se for playlist, cria subpasta
+            // 🔹 Subpasta por playlist
             if (!string.IsNullOrWhiteSpace(video.PlaylistTitle))
             {
                 outputDir = Path.Combine(outputDir, SanitizeFileName(video.PlaylistTitle));
-                if (!Directory.Exists(outputDir))
-                    Directory.CreateDirectory(outputDir);
+                Directory.CreateDirectory(outputDir);
             }
 
-            // ===== FORMATO ESTÁVEL (SEM HLS / SEM DASH) =====
+            // 🔹 Formato estável (arquivo já com áudio)
             string format = chkAudioOnly.Checked
-    ? "bestaudio/best"
-    : "best[ext=mp4]/best";
-
-
-
-
-
+                ? "bestaudio/best"
+                : "best[ext=mp4]/best";
 
             string outputTemplate = Path.Combine(outputDir, "%(title)s.%(ext)s");
 
-            // ===== ARGUMENTOS LIMPOS E SEGUROS =====
             string args =
-    $"--newline " +
-    $"--output \"{outputTemplate}\" " +
-    $"--format \"{format}\" " +
-    "--ignore-errors " +
-    "--no-warnings " +
-    "--retries 10 " +
-    "--fragment-retries 10 " +
-    "--concurrent-fragments 3 " +
-    "--user-agent \"Mozilla/5.0\" " +
-    "--referer \"https://www.youtube.com/\" " +
-    (chkAudioOnly.Checked
-        ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
-        : "--merge-output-format mp4 --embed-thumbnail --add-metadata --audio-multistreams ") +
-    $"\"{video.Url}\"";
+                $"--newline " +
+                $"--output \"{outputTemplate}\" " +
+                $"--format \"{format}\" " +
+                "--ignore-errors " +
+                "--no-warnings " +
+                "--retries 10 " +
+                "--fragment-retries 10 " +
+                "--concurrent-fragments 3 " +
+                "--user-agent \"Mozilla/5.0\" " +
+                "--referer \"https://www.youtube.com/\" " +
+                (chkAudioOnly.Checked
+                    ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
+                    : "--embed-thumbnail --add-metadata ") +
+                $"\"{video.Url}\"";
 
-
-
-
-            // ffmpeg
             if (File.Exists(ffmpegPath))
             {
                 string ffmpegDir = Path.GetDirectoryName(ffmpegPath);
                 args += $" --ffmpeg-location \"{ffmpegDir}\"";
             }
-
-            Invoke((MethodInvoker)(() =>
-            {
-                progressBar.Value = 100;
-                lblProgress.Text = "100%";
-                lblStatus.Text = $"✅ {current}/{total} Concluído";
-                lblStatus.BackColor = Color.LimeGreen;
-
-                // ✅ AQUI ESTÁ O OBJETO CERTO
-                video.Status = StatusVideo.Concluido;
-                ListBoxURL.Refresh();
-            }));
 
             var psi = new ProcessStartInfo
             {
@@ -553,38 +555,35 @@ namespace ConvertPro
                 string line = e.Data.Trim();
                 Console.WriteLine(line);
 
-                Invoke((MethodInvoker)(() =>
+                if (line.Contains("[download]") && line.Contains("%"))
                 {
-                    if (line.Contains("[download]") && line.Contains("%"))
+                    var m = Regex.Match(line, @"(\d+(\.\d+)?)%");
+                    if (m.Success)
                     {
-                        var m = Regex.Match(line, @"(\d+(\.\d+)?)%");
-                        if (m.Success)
-                        {
-                            int percent = (int)float.Parse(m.Groups[1].Value);
-                            progressBar.Value = Math.Min(percent, 100);
-                            lblProgress.Text = percent + "%";
-                            lblStatus.Text =
-                            $"📥 {current}/{total} • {video.Title} • {percent}%";
+                        int percent = (int)float.Parse(m.Groups[1].Value);
 
-                        }
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            progressBarVideo.Value = Math.Min(percent, 100);                          
+                        }));
                     }
-                    else if (line.Contains("Merging formats"))
+                }
+                else if (line.Contains("Merging formats"))
+                {
+                    Invoke((MethodInvoker)(() =>
                     {
                         lblStatus.Text = "🔗 Mesclando áudio e vídeo...";
                         lblStatus.BackColor = Color.DarkBlue;
-                    }
-                    else if (line.Contains("Extracting audio"))
+                    }));
+                }
+                else if (line.Contains("Extracting audio"))
+                {
+                    Invoke((MethodInvoker)(() =>
                     {
                         lblStatus.Text = "🎵 Convertendo áudio...";
                         lblStatus.BackColor = Color.Purple;
-                    }
-                }));
-            };
-
-            process.ErrorDataReceived += (s, e) =>
-            {
-                if (!string.IsNullOrWhiteSpace(e.Data))
-                    Console.WriteLine("[ERR] " + e.Data);
+                    }));
+                }
             };
 
             try
@@ -595,24 +594,29 @@ namespace ConvertPro
 
                 await process.WaitForExitAsync(cancellationToken);
 
+                if (cancellationToken.IsCancellationRequested)
+                    throw new OperationCanceledException();
+
                 if (process.ExitCode != 0)
                     throw new Exception("Falha no download. Vídeo pode estar restrito ou indisponível.");
 
+                // ✅ SUCESSO REAL
                 Invoke((MethodInvoker)(() =>
                 {
-                    progressBar.Value = 100;
-                    lblProgress.Text = "100%";
+                    progressBarVideo.Value = 100;                   
                     lblStatus.Text = $"✅ {current}/{total} Concluído";
                     lblStatus.BackColor = Color.LimeGreen;
+
+                    video.Status = StatusVideo.Concluido;
+                    ListBoxURL.Refresh();
                 }));
             }
             finally
             {
                 currentProcess = null;
             }
-
-            await Task.Delay(1000, cancellationToken);
         }
+
 
 
 
@@ -849,13 +853,14 @@ namespace ConvertPro
             }
         }
         private async void btnAdicionarURL_Click(object sender, EventArgs e)
-        {            
+        {
             string input = txtUrl.Text.Trim();
             string originalInput = input;
 
-            if (string.IsNullOrWhiteSpace(input) || input.Contains("Enter")) return;
+            if (string.IsNullOrWhiteSpace(input) || input.Contains("Enter"))
+                return;
 
-            // 🔴 BLOQUEIO DE URL INVÁLIDA
+            // 🔴 Validação de URL
             if (!UrlYoutubeValida(input))
             {
                 MessageBox.Show(
@@ -869,8 +874,6 @@ namespace ConvertPro
                 txtUrl.SelectAll();
                 return;
             }
-            input = NormalizarUrlYoutube(input);
-
 
             btnAdicionarURL.Enabled = false;
             lblAnalisando.Visible = true;
@@ -879,7 +882,12 @@ namespace ConvertPro
 
             try
             {
-                bool isPlaylist =  originalInput.Contains("list=") || originalInput.Contains("playlist");
+                bool isPlaylist =
+                    originalInput.Contains("list=") ||
+                    originalInput.Contains("playlist");
+
+                // 🔹 NORMALIZA SOMENTE DEPOIS DE DETECTAR
+                input = NormalizarUrlYoutube(input);
 
                 if (isPlaylist)
                 {
@@ -896,18 +904,18 @@ namespace ConvertPro
                         if (resposta == DialogResult.Cancel)
                             return;
 
+                        // ================= PLAYLIST COMPLETA =================
                         if (resposta == DialogResult.Yes)
                         {
                             string playlistId = playlistMatch.Groups[1].Value;
                             string playlistUrl = $"https://www.youtube.com/playlist?list={playlistId}";
 
                             frmAguarde = new FrmAguarde(
-                                "🔄 Carregando lista de vídeos...\nAguarde para iniciar o download."
+                                "🔄 Carregando lista de vídeos...\nAguarde."
                             );
                             frmAguarde.Show(this);
                             Application.DoEvents();
 
-                            // obtém info da playlist
                             var info = await GetInfoAsync(playlistUrl);
 
                             string playlistTitleReal =
@@ -915,7 +923,6 @@ namespace ConvertPro
                                     ? info.Title
                                     : playlistId;
 
-                            // expande vídeos da playlist
                             var videos = await GetPlaylistVideosAsync(playlistUrl);
 
                             if (videos.Count == 0)
@@ -924,17 +931,12 @@ namespace ConvertPro
                                     "Não foi possível carregar os vídeos da playlist.",
                                     "Erro",
                                     MessageBoxButtons.OK,
-                                    MessageBoxIcon.Error
-                                );
+                                    MessageBoxIcon.Error);
                                 return;
                             }
 
                             foreach (var v in videos)
                             {
-                                // Corrigido: verifica se já existe um vídeo com a mesma URL na lista
-                                if (expandedList.Cast<PlaylistVideo>().Any(x => x.Url == v.Url))
-                                    continue;
-
                                 string urlNormalizada = NormalizarUrlYoutube(v.Url);
 
                                 if (UrlJaExisteNaFila(urlNormalizada))
@@ -942,63 +944,39 @@ namespace ConvertPro
 
                                 expandedList.Add(new PlaylistVideo
                                 {
-                                    Url = v.Url,
+                                    Url = urlNormalizada,
                                     Title = v.Title,
                                     PlaylistTitle = playlistTitleReal
                                 });
                             }
 
-
                             txtTitle.Text = $"📁 Playlist: {playlistTitleReal}";
                         }
-
-                        else // ❗ playlist detectada, usuário escolheu NÃO
+                        // ================= APENAS O VÍDEO =================
+                        else
                         {
-                            var videoMatch = Regex.Match(input, @"(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})");
-                            if (videoMatch.Success)
-                            {
-                                frmAguarde = new FrmAguarde("🔄 Carregando informações do vídeo...\nAguarde.");
-                                frmAguarde.Show(this);
-                                Application.DoEvents();
+                            var videoMatch = Regex.Match(originalInput, @"(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})");
+                            if (!videoMatch.Success)
+                                return;
 
-                                string videoUrl = $"https://www.youtube.com/watch?v={videoMatch.Groups[1].Value}";
-
-                                // pega as informações do vídeo
-                                var info = await GetInfoAsync(videoUrl);
-
-                                if (UrlJaExisteNaFila(videoUrl))
-                                {
-                                    lblStatus.Text = "⚠️ Vídeo já está na lista";
-                                    lblStatus.BackColor = Color.Goldenrod;
-                                    return;
-                                }
-
-                                // adiciona o vídeo com título
-                                expandedList.Add(new PlaylistVideo
-                                {
-                                    Url = videoUrl,
-                                    Title = info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
-                                        ? info.Title
-                                        : "Vídeo único",
-                                    PlaylistTitle = null
-                                });
-
-                                txtTitle.Text = "🎥 Vídeo único";
-                            }
-
-                        }
-                    }
-                    else
-                    {
-                        // ⚠️ FALLBACK: tinha "list=", mas regex falhou
-                        var videoMatch = Regex.Match(input, @"(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})");
-                        if (videoMatch.Success)
-                        {
                             string videoUrl = $"https://www.youtube.com/watch?v={videoMatch.Groups[1].Value}";
+                            videoUrl = NormalizarUrlYoutube(videoUrl);
+
+                            if (UrlJaExisteNaFila(videoUrl))
+                                return;
+
+                            frmAguarde = new FrmAguarde("🔄 Carregando informações do vídeo...\nAguarde.");
+                            frmAguarde.Show(this);
+                            Application.DoEvents();
+
+                            var info = await GetInfoAsync(videoUrl);
+
                             expandedList.Add(new PlaylistVideo
                             {
                                 Url = videoUrl,
-                                Title = "Vídeo único",
+                                Title = info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
+                                    ? info.Title
+                                    : "Vídeo único",
                                 PlaylistTitle = null
                             });
 
@@ -1006,29 +984,38 @@ namespace ConvertPro
                         }
                     }
                 }
+                // ================= VÍDEO ÚNICO =================
                 else
                 {
-                    // ✅ NÃO é playlist → vídeo único normal
+                    if (UrlJaExisteNaFila(input))
+                        return;
+
+                    frmAguarde = new FrmAguarde("🔄 Carregando informações do vídeo...\nAguarde.");
+                    frmAguarde.Show(this);
+                    Application.DoEvents();
+
+                    var info = await GetInfoAsync(input);
+
                     expandedList.Add(new PlaylistVideo
                     {
                         Url = input,
-                        Title = "Vídeo único",
+                        Title = info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
+                            ? info.Title
+                            : "Vídeo único",
                         PlaylistTitle = null
                     });
 
                     txtTitle.Text = "🎥 Vídeo único";
                 }
 
-
-
                 lblStatus.Text = "✅ Adicionado à lista";
-                lblStatus.BackColor = Color.Green;
-                AtualizarTotalLinks();
+                lblStatus.BackColor = Color.Green;              
                 AtualizarBotoes();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro: {ex.Message}", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -1059,14 +1046,11 @@ namespace ConvertPro
             ListBoxURL.DataSource = expandedList;
 
             // Zera labels/indicadores
-            lblStatusContagem.Text = "";
-            lblProgress.Text = "";
+            lblStatusContagem.Text = "";          
             txtTitle.Text = "";
 
-            // Atualiza total/estado dos botões
-            AtualizarTotalLinks();
-            AtualizarBotoes();
-            AtualizarTotalLinks();
+            // Atualiza total/estado dos botões           
+            AtualizarBotoes();            
             AtualizarBotoes();
         }
 
@@ -1150,9 +1134,7 @@ namespace ConvertPro
 
             // Recarregar DataSource
             ListBoxURL.DataSource = null;
-            ListBoxURL.DataSource = expandedList;
-
-            AtualizarTotalLinks();
+            ListBoxURL.DataSource = expandedList;           
             AtualizarBotoes();
 
             lblStatus.Text = "🗑️ Itens removidos";
@@ -1245,9 +1227,9 @@ namespace ConvertPro
             cancellationTokenSource = new CancellationTokenSource();
             AtualizarBotoes();
 
-            progressBar.Style = ProgressBarStyle.Continuous;
-            progressBar.Visible = true;
-            progressBar.Value = 0;
+            progressBarVideo.Style = ProgressBarStyle.Continuous;
+            progressBarVideo.Visible = true;
+            progressBarVideo.Value = 0;
             lblStatus.Text = "🚀 Preparando downloads...";
             lblStatus.BackColor = Color.Orange;
 
@@ -1278,7 +1260,7 @@ namespace ConvertPro
             }
             finally
             {
-                progressBar.Visible = false;
+                progressBarVideo.Visible = false;
                 isDownloading = false;
                 isPaused = false;
                 currentProcess = null;
