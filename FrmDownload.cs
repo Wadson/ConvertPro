@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -45,6 +46,60 @@ namespace ConvertPro
             InitializeForm();
             this.Shown += (s, e) => AplicarPlaceholderUrl();
         }
+        private bool UrlJaExisteNaFila(string url)
+        {
+            // Corrigido: faz cast para IEnumerable<PlaylistVideo> para usar LINQ
+            return expandedList.Cast<PlaylistVideo>().Any(x => x.Url == url);
+        }
+
+        private string NormalizarUrlYoutube(string url)
+        {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+                return url;
+
+            // youtu.be/ID
+            if (uri.Host.Contains("youtu.be"))
+            {
+                string videoId = uri.AbsolutePath.Trim('/');
+                return $"https://www.youtube.com/watch?v={videoId}";
+            }
+
+            // youtube.com/watch?v=ID
+            if (uri.Host.Contains("youtube.com"))
+            {
+                var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+                if (query["v"] != null)
+                    return $"https://www.youtube.com/watch?v={query["v"]}";
+
+                // playlist pura
+                if (uri.AbsolutePath.StartsWith("/playlist") && query["list"] != null)
+                    return $"https://www.youtube.com/playlist?list={query["list"]}";
+            }
+
+            return url;
+        }
+
+        private bool UrlYoutubeValida(string url)
+        {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+                return false;
+
+            if (uri.Host.Contains("youtube.com"))
+            {
+                return uri.AbsolutePath.StartsWith("/watch")
+                    || uri.AbsolutePath.StartsWith("/playlist")
+                    || uri.AbsolutePath.StartsWith("/shorts");
+            }
+
+            if (uri.Host.Contains("youtu.be"))
+            {
+                return uri.AbsolutePath.Length > 1;
+            }
+
+            return false;
+        }
+
         private void AplicarPlaceholderUrl()
         {
             if (string.IsNullOrWhiteSpace(txtUrl.Text))
@@ -309,8 +364,21 @@ namespace ConvertPro
             public string PlaylistTitle { get; set; } // pode ser null para vídeo avulso
             public override string ToString()
             {
-                return string.IsNullOrEmpty(PlaylistTitle) ? Title : $"[{PlaylistTitle}] {Title}";
+                string statusIcon = Status switch
+                {
+                    StatusVideo.Aguardando => "⏳",
+                    StatusVideo.Baixando => "⬇️",
+                    StatusVideo.Concluido => "✅",
+                    StatusVideo.Erro => "❌",
+                    _ => ""
+                };
+
+                return $"{statusIcon} {Title}";               
             }
+            // 🔹 NOVO
+            public StatusVideo Status { get; set; } = StatusVideo.Aguardando;
+
+           
         }
 
 
@@ -364,10 +432,16 @@ namespace ConvertPro
 
                 try
                 {
+                    video.Status = StatusVideo.Baixando;
+                    ListBoxURL.Refresh();
+
                     await DownloadVideoAsync(video, i + 1, totalCount, cancellationToken);
                 }
                 catch (Exception ex)
                 {
+                    video.Status = StatusVideo.Erro;
+                    ListBoxURL.Refresh();
+
                     // 🔁 pula vídeo quebrado e continua o lote
                     Invoke((MethodInvoker)(() =>
                     {
@@ -381,7 +455,8 @@ namespace ConvertPro
 
                     // pequena pausa para evitar throttling
                     await Task.Delay(1500, cancellationToken);
-                }
+                   
+                }              
 
                 if (cancellationToken.IsCancellationRequested)
                     break;
@@ -407,8 +482,10 @@ namespace ConvertPro
 
             // ===== FORMATO ESTÁVEL (SEM HLS / SEM DASH) =====
             string format = chkAudioOnly.Checked
-     ? "bestaudio[ext=m4a]/bestaudio"
-     : "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best";
+    ? "bestaudio/best"
+    : "best[ext=mp4]/best";
+
+
 
 
 
@@ -429,7 +506,7 @@ namespace ConvertPro
     "--referer \"https://www.youtube.com/\" " +
     (chkAudioOnly.Checked
         ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
-        : "--merge-output-format mp4 --embed-thumbnail --add-metadata ") +
+        : "--merge-output-format mp4 --embed-thumbnail --add-metadata --audio-multistreams ") +
     $"\"{video.Url}\"";
 
 
@@ -444,10 +521,14 @@ namespace ConvertPro
 
             Invoke((MethodInvoker)(() =>
             {
-                lblStatus.Text = $"📥 Baixando {current}/{total}";
-                lblStatus.BackColor = Color.RoyalBlue;
-                progressBar.Value = 0;
-                lblProgress.Text = "0%";
+                progressBar.Value = 100;
+                lblProgress.Text = "100%";
+                lblStatus.Text = $"✅ {current}/{total} Concluído";
+                lblStatus.BackColor = Color.LimeGreen;
+
+                // ✅ AQUI ESTÁ O OBJETO CERTO
+                video.Status = StatusVideo.Concluido;
+                ListBoxURL.Refresh();
             }));
 
             var psi = new ProcessStartInfo
@@ -482,7 +563,9 @@ namespace ConvertPro
                             int percent = (int)float.Parse(m.Groups[1].Value);
                             progressBar.Value = Math.Min(percent, 100);
                             lblProgress.Text = percent + "%";
-                            lblStatus.Text = $"📥 {current}/{total} - {percent}%";
+                            lblStatus.Text =
+                            $"📥 {current}/{total} • {video.Title} • {percent}%";
+
                         }
                     }
                     else if (line.Contains("Merging formats"))
@@ -711,7 +794,7 @@ namespace ConvertPro
                 using var process = Process.Start(psi);
                 await process.WaitForExitAsync();
 
-                return process.ExitCode == 0;
+                return process.ExitCode == 0;     
             }
             catch
             {
@@ -766,9 +849,28 @@ namespace ConvertPro
             }
         }
         private async void btnAdicionarURL_Click(object sender, EventArgs e)
-        {
+        {            
             string input = txtUrl.Text.Trim();
+            string originalInput = input;
+
             if (string.IsNullOrWhiteSpace(input) || input.Contains("Enter")) return;
+
+            // 🔴 BLOQUEIO DE URL INVÁLIDA
+            if (!UrlYoutubeValida(input))
+            {
+                MessageBox.Show(
+                    "URL inválida.\n\nInforme um link válido do YouTube.",
+                    "Link inválido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                txtUrl.Focus();
+                txtUrl.SelectAll();
+                return;
+            }
+            input = NormalizarUrlYoutube(input);
+
 
             btnAdicionarURL.Enabled = false;
             lblAnalisando.Visible = true;
@@ -777,87 +879,136 @@ namespace ConvertPro
 
             try
             {
-                bool isPlaylist = input.Contains("list=") || input.Contains("playlist");
+                bool isPlaylist =  originalInput.Contains("list=") || originalInput.Contains("playlist");
 
                 if (isPlaylist)
                 {
-                    // Extrai ID da playlist
-                    var playlistMatch = Regex.Match(input, @"list=([a-zA-Z0-9_-]+)");
+                    var playlistMatch = Regex.Match(originalInput, @"list=([a-zA-Z0-9_-]+)");
+
                     if (playlistMatch.Success)
                     {
-                        string playlistId = playlistMatch.Groups[1].Value;
-                        string playlistUrl = $"https://www.youtube.com/playlist?list={playlistId}";
-
                         var resposta = MessageBox.Show(
                             "📁 PLAYLIST DETECTADA!\n\nDeseja baixar TODA a playlist?",
-                            "Playlist Encontrada", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            "Playlist Encontrada",
+                            MessageBoxButtons.YesNoCancel,
+                            MessageBoxIcon.Question);
 
-                        if (resposta == DialogResult.Cancel) return;
+                        if (resposta == DialogResult.Cancel)
+                            return;
 
                         if (resposta == DialogResult.Yes)
                         {
-                            // 🔹 AGORA SIM mostra o loading
+                            string playlistId = playlistMatch.Groups[1].Value;
+                            string playlistUrl = $"https://www.youtube.com/playlist?list={playlistId}";
+
                             frmAguarde = new FrmAguarde(
                                 "🔄 Carregando lista de vídeos...\nAguarde para iniciar o download."
                             );
                             frmAguarde.Show(this);
                             Application.DoEvents();
 
-                            // 🔹 obtém o nome real da playlist
+                            // obtém info da playlist
                             var info = await GetInfoAsync(playlistUrl);
 
-                            string playlistTitleReal = info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
-                                ? info.Title
-                                : playlistId;
+                            string playlistTitleReal =
+                                info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
+                                    ? info.Title
+                                    : playlistId;
 
-                            // 🔹 EXPANDE a playlist em vídeos
+                            // expande vídeos da playlist
                             var videos = await GetPlaylistVideosAsync(playlistUrl);
-
 
                             if (videos.Count == 0)
                             {
-                                MessageBox.Show("Não foi possível carregar os vídeos da playlist.",
-                                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(
+                                    "Não foi possível carregar os vídeos da playlist.",
+                                    "Erro",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error
+                                );
                                 return;
                             }
 
-                            // 🔹 adiciona cada vídeo corretamente
                             foreach (var v in videos)
                             {
+                                // Corrigido: verifica se já existe um vídeo com a mesma URL na lista
+                                if (expandedList.Cast<PlaylistVideo>().Any(x => x.Url == v.Url))
+                                    continue;
+
+                                string urlNormalizada = NormalizarUrlYoutube(v.Url);
+
+                                if (UrlJaExisteNaFila(urlNormalizada))
+                                    continue;
+
                                 expandedList.Add(new PlaylistVideo
                                 {
                                     Url = v.Url,
                                     Title = v.Title,
                                     PlaylistTitle = playlistTitleReal
-                                    // cada item é UM vídeo, nunca playlist
                                 });
-
                             }
+
 
                             txtTitle.Text = $"📁 Playlist: {playlistTitleReal}";
                         }
-                        else
+
+                        else // ❗ playlist detectada, usuário escolheu NÃO
                         {
-                            // Extrai apenas o vídeo (remove parâmetros de playlist)
                             var videoMatch = Regex.Match(input, @"(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})");
                             if (videoMatch.Success)
                             {
+                                frmAguarde = new FrmAguarde("🔄 Carregando informações do vídeo...\nAguarde.");
+                                frmAguarde.Show(this);
+                                Application.DoEvents();
+
                                 string videoUrl = $"https://www.youtube.com/watch?v={videoMatch.Groups[1].Value}";
+
+                                // pega as informações do vídeo
+                                var info = await GetInfoAsync(videoUrl);
+
+                                if (UrlJaExisteNaFila(videoUrl))
+                                {
+                                    lblStatus.Text = "⚠️ Vídeo já está na lista";
+                                    lblStatus.BackColor = Color.Goldenrod;
+                                    return;
+                                }
+
+                                // adiciona o vídeo com título
                                 expandedList.Add(new PlaylistVideo
                                 {
                                     Url = videoUrl,
-                                    Title = "Vídeo único",
+                                    Title = info.IsValid && !string.IsNullOrWhiteSpace(info.Title)
+                                        ? info.Title
+                                        : "Vídeo único",
                                     PlaylistTitle = null
                                 });
 
-                                txtTitle.Text = $"🎥 Vídeo único";
+                                txtTitle.Text = "🎥 Vídeo único";
                             }
+
+                        }
+                    }
+                    else
+                    {
+                        // ⚠️ FALLBACK: tinha "list=", mas regex falhou
+                        var videoMatch = Regex.Match(input, @"(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})");
+                        if (videoMatch.Success)
+                        {
+                            string videoUrl = $"https://www.youtube.com/watch?v={videoMatch.Groups[1].Value}";
+                            expandedList.Add(new PlaylistVideo
+                            {
+                                Url = videoUrl,
+                                Title = "Vídeo único",
+                                PlaylistTitle = null
+                            });
+
+                            txtTitle.Text = "🎥 Vídeo único";
                         }
                     }
                 }
                 else
                 {
-                    // É vídeo único
+                    // ✅ NÃO é playlist → vídeo único normal
                     expandedList.Add(new PlaylistVideo
                     {
                         Url = input,
@@ -865,8 +1016,10 @@ namespace ConvertPro
                         PlaylistTitle = null
                     });
 
-                    txtTitle.Text = $"🎥 Vídeo único";
+                    txtTitle.Text = "🎥 Vídeo único";
                 }
+
+
 
                 lblStatus.Text = "✅ Adicionado à lista";
                 lblStatus.BackColor = Color.Green;

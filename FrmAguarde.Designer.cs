@@ -107,6 +107,7 @@
             PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             ShowIcon = false;
             ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterScreen;
             ResumeLayout(false);
             PerformLayout();
         }
