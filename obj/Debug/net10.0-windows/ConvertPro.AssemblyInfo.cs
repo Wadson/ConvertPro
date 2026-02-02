@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConvertPro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e750968a2d96e1e9b17e3ee07559cb540a6bbcb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1540f35ce87676401f840ac30a1766ec6dfb0f2")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConvertPro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConvertPro")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.0.0")]

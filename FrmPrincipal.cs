@@ -1,4 +1,4 @@
-using ConvertPro.Converter;
+ï»¿using ConvertPro.Converter;
 using Krypton.Toolkit;
 using System.Reflection;
 namespace ConvertPro
@@ -9,39 +9,77 @@ namespace ConvertPro
         {
             InitializeComponent();
         }
+       
+
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
         }
+        private void AtualizarEstadoMenu()
+        {
+            bool existeFormAberto = pnlContainer.Controls
+                .OfType<Form>()
+                .Any(f => !f.IsDisposed);
+
+            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            {
+                if (ctrl is Button btn)
+                {
+                    btn.Enabled = !existeFormAberto;
+                }
+            }
+        }
+
+
+
         private void AbrirFormEnPanel(Form form)
         {
-            // Fecha qualquer formulário já aberto dentro do painel
-            if (this.pnlContainer.Controls.Count > 0)
+            // Fecha formulÃ¡rio atual
+            if (pnlContainer.Controls.Count > 0)
             {
-                Control controleAtual = this.pnlContainer.Controls[0];
-
-                if (controleAtual is Form formAberto && !formAberto.IsDisposed)
+                if (pnlContainer.Controls[0] is Form formAberto && !formAberto.IsDisposed)
                 {
                     formAberto.Close();
                 }
             }
 
-            pnlContainer.Controls.Clear(); // Remove qualquer controle que ainda esteja no painel
+            pnlContainer.Controls.Clear();
 
             form.TopLevel = false;
             form.Dock = DockStyle.Fill;
-            form.FormClosed += Form_FormClosed; // Garante que ao fechar, verificamos se ainda há formulários abertos
-            this.pnlContainer.Controls.Add(form);
-            this.pnlContainer.Tag = form;
+
+            form.FormClosed += (s, e) =>
+            {
+                // ðŸ”´ remove o form do container
+                if (pnlContainer.Controls.Contains(form))
+                {
+                    pnlContainer.Controls.Remove(form);
+                }
+
+                form.Dispose();
+
+                // ðŸ”“ agora o menu reflete o estado real
+                AtualizarEstadoMenu();
+            };
+
+
+            pnlContainer.Controls.Add(form);
+            pnlContainer.Tag = form;
             form.Show();
+
+            // ðŸ”’ trava menu apÃ³s abrir
+            AtualizarEstadoMenu();
         }
+
+
+
         private async Task InicializarAsync()
         {
             var version = Assembly.GetExecutingAssembly()
                                  .GetName()
                                  .Version?.ToString();
 
-            lblVersaoSistema.Text = $"ConvertPro • Versão {version} • © 2026 WR Soft";
-            this.Text = $"ConvertPro • Versão {version}";
+            lblVersaoSistema.Text = $"ConvertPro â€¢ VersÃ£o {version} â€¢ Â© 2026 WR Soft";
+            this.Text = $"ConvertPro â€¢ VersÃ£o {version}";
 
             try
             {
@@ -52,7 +90,7 @@ namespace ConvertPro
             {
                 MessageBox.Show(
                     $"Falha ao preparar ferramentas internas:\n\n{ex.Message}",
-                    "Erro crítico",
+                    "Erro crÃ­tico",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 

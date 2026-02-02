@@ -179,7 +179,7 @@
             btnExcluirSelecionados.FlatStyle = FlatStyle.Flat;
             btnExcluirSelecionados.ForeColor = SystemColors.ActiveCaption;
             btnExcluirSelecionados.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            btnExcluirSelecionados.IconColor = Color.FromArgb(6, 128, 254);
+            btnExcluirSelecionados.IconColor = Color.Red;
             btnExcluirSelecionados.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnExcluirSelecionados.IconSize = 42;
             btnExcluirSelecionados.Location = new Point(627, 249);
@@ -197,7 +197,7 @@
             btnLimparLista.FlatStyle = FlatStyle.Flat;
             btnLimparLista.ForeColor = SystemColors.ActiveCaption;
             btnLimparLista.IconChar = FontAwesome.Sharp.IconChar.Broom;
-            btnLimparLista.IconColor = Color.FromArgb(6, 128, 254);
+            btnLimparLista.IconColor = Color.Silver;
             btnLimparLista.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnLimparLista.IconSize = 42;
             btnLimparLista.Location = new Point(629, 201);
@@ -235,7 +235,7 @@
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Stop;
-            btnCancelar.IconColor = Color.FromArgb(6, 128, 254);
+            btnCancelar.IconColor = Color.Crimson;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.IconSize = 42;
             btnCancelar.Location = new Point(343, 322);
@@ -252,7 +252,7 @@
             btnPausar.FlatAppearance.BorderSize = 0;
             btnPausar.FlatStyle = FlatStyle.Flat;
             btnPausar.IconChar = FontAwesome.Sharp.IconChar.Pause;
-            btnPausar.IconColor = Color.FromArgb(6, 128, 254);
+            btnPausar.IconColor = Color.Orange;
             btnPausar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnPausar.IconSize = 42;
             btnPausar.Location = new Point(293, 322);
@@ -269,7 +269,7 @@
             btnContinuar.FlatAppearance.BorderSize = 0;
             btnContinuar.FlatStyle = FlatStyle.Flat;
             btnContinuar.IconChar = FontAwesome.Sharp.IconChar.Play;
-            btnContinuar.IconColor = Color.FromArgb(6, 128, 254);
+            btnContinuar.IconColor = Color.Green;
             btnContinuar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnContinuar.IconSize = 42;
             btnContinuar.Location = new Point(243, 322);
@@ -343,7 +343,7 @@
             btnSair.FlatAppearance.BorderSize = 0;
             btnSair.FlatStyle = FlatStyle.Flat;
             btnSair.IconChar = FontAwesome.Sharp.IconChar.DoorOpen;
-            btnSair.IconColor = Color.FromArgb(6, 128, 254);
+            btnSair.IconColor = Color.FromArgb(64, 64, 64);
             btnSair.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSair.IconSize = 42;
             btnSair.Location = new Point(639, 3);
@@ -387,8 +387,8 @@
             kryptonLabel1.Location = new Point(0, 44);
             kryptonLabel1.Name = "kryptonLabel1";
             kryptonLabel1.Size = new Size(683, 30);
-            kryptonLabel1.StateCommon.ShortText.Color1 = Color.FromArgb(6, 148, 254);
-            kryptonLabel1.StateCommon.ShortText.Color2 = Color.FromArgb(6, 148, 254);
+            kryptonLabel1.StateCommon.ShortText.Color1 = Color.Orange;
+            kryptonLabel1.StateCommon.ShortText.Color2 = Color.Orange;
             kryptonLabel1.StateCommon.ShortText.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             kryptonLabel1.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             kryptonLabel1.TabIndex = 74;
@@ -400,7 +400,7 @@
             btnOpenVideo.FlatAppearance.BorderSize = 0;
             btnOpenVideo.FlatStyle = FlatStyle.Flat;
             btnOpenVideo.IconChar = FontAwesome.Sharp.IconChar.FolderOpen;
-            btnOpenVideo.IconColor = Color.FromArgb(6, 128, 254);
+            btnOpenVideo.IconColor = Color.FromArgb(0, 200, 150);
             btnOpenVideo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnOpenVideo.IconSize = 42;
             btnOpenVideo.Location = new Point(629, 89);
@@ -418,7 +418,7 @@
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.IconChar = FontAwesome.Sharp.IconChar.FolderOpen;
-            btnSave.IconColor = Color.FromArgb(6, 128, 254);
+            btnSave.IconColor = Color.FromArgb(0, 200, 150);
             btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSave.IconSize = 42;
             btnSave.Location = new Point(627, 153);

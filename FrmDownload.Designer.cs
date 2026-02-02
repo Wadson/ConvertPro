@@ -60,10 +60,10 @@
             btnContinuar = new FontAwesome.Sharp.IconButton();
             statusStrip1 = new StatusStrip();
             lblStatus = new ToolStripStatusLabel();
-            toolTip1 = new ToolTip(components);
-            progressBarTotal = new Krypton.Toolkit.KryptonProgressBar();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             lblStatusContagem = new ToolStripStatusLabel();
+            toolTip1 = new ToolTip(components);
+            progressBarTotal = new Krypton.Toolkit.KryptonProgressBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cmbVideoQuality).BeginInit();
@@ -149,7 +149,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(683, 66);
+            panel1.Size = new Size(683, 73);
             panel1.TabIndex = 1017;
             // 
             // btnSair
@@ -158,7 +158,7 @@
             btnSair.FlatAppearance.BorderSize = 0;
             btnSair.FlatStyle = FlatStyle.Flat;
             btnSair.IconChar = FontAwesome.Sharp.IconChar.DoorOpen;
-            btnSair.IconColor = Color.FromArgb(6, 128, 254);
+            btnSair.IconColor = Color.FromArgb(64, 64, 64);
             btnSair.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSair.IconSize = 42;
             btnSair.Location = new Point(641, 3);
@@ -187,12 +187,12 @@
             // kryptonLabel2
             // 
             kryptonLabel2.Dock = DockStyle.Bottom;
-            kryptonLabel2.Location = new Point(0, 40);
+            kryptonLabel2.Location = new Point(0, 43);
             kryptonLabel2.Name = "kryptonLabel2";
-            kryptonLabel2.Size = new Size(683, 26);
-            kryptonLabel2.StateCommon.ShortText.Color1 = Color.FromArgb(8, 148, 254);
-            kryptonLabel2.StateCommon.ShortText.Color2 = Color.FromArgb(32, 30, 45);
-            kryptonLabel2.StateCommon.ShortText.Font = new Font("Segoe UI", 12.25F);
+            kryptonLabel2.Size = new Size(683, 30);
+            kryptonLabel2.StateCommon.ShortText.Color1 = Color.FromArgb(0, 123, 255);
+            kryptonLabel2.StateCommon.ShortText.Color2 = Color.FromArgb(0, 123, 255);
+            kryptonLabel2.StateCommon.ShortText.Font = new Font("Segoe UI", 14.25F);
             kryptonLabel2.StateCommon.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Center;
             kryptonLabel2.TabIndex = 75;
             kryptonLabel2.Values.Text = "Download de vídeos do YouTube";
@@ -245,7 +245,7 @@
             btnAdicionarURL.FlatAppearance.BorderSize = 0;
             btnAdicionarURL.FlatStyle = FlatStyle.Flat;
             btnAdicionarURL.IconChar = FontAwesome.Sharp.IconChar.PlusSquare;
-            btnAdicionarURL.IconColor = Color.FromArgb(6, 128, 254);
+            btnAdicionarURL.IconColor = Color.FromArgb(0, 200, 150);
             btnAdicionarURL.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAdicionarURL.IconSize = 42;
             btnAdicionarURL.Location = new Point(632, 79);
@@ -438,7 +438,7 @@
             btnExcluirSelecionados.FlatStyle = FlatStyle.Flat;
             btnExcluirSelecionados.ForeColor = SystemColors.ActiveCaption;
             btnExcluirSelecionados.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            btnExcluirSelecionados.IconColor = Color.FromArgb(6, 128, 254);
+            btnExcluirSelecionados.IconColor = Color.Red;
             btnExcluirSelecionados.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnExcluirSelecionados.IconSize = 42;
             btnExcluirSelecionados.Location = new Point(635, 288);
@@ -456,7 +456,7 @@
             btnLimparLista.FlatStyle = FlatStyle.Flat;
             btnLimparLista.ForeColor = SystemColors.ActiveCaption;
             btnLimparLista.IconChar = FontAwesome.Sharp.IconChar.Broom;
-            btnLimparLista.IconColor = Color.FromArgb(6, 128, 254);
+            btnLimparLista.IconColor = Color.Silver;
             btnLimparLista.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnLimparLista.IconSize = 42;
             btnLimparLista.Location = new Point(635, 238);
@@ -496,7 +496,7 @@
             btnDownload.FlatAppearance.BorderSize = 0;
             btnDownload.FlatStyle = FlatStyle.Flat;
             btnDownload.IconChar = FontAwesome.Sharp.IconChar.Download;
-            btnDownload.IconColor = Color.FromArgb(6, 128, 254);
+            btnDownload.IconColor = Color.FromArgb(0, 123, 255);
             btnDownload.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnDownload.IconSize = 42;
             btnDownload.Location = new Point(396, 361);
@@ -513,7 +513,7 @@
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.IconChar = FontAwesome.Sharp.IconChar.Stop;
-            btnCancelar.IconColor = Color.FromArgb(6, 128, 254);
+            btnCancelar.IconColor = Color.Crimson;
             btnCancelar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnCancelar.IconSize = 42;
             btnCancelar.Location = new Point(346, 361);
@@ -530,7 +530,7 @@
             btnPausar.FlatAppearance.BorderSize = 0;
             btnPausar.FlatStyle = FlatStyle.Flat;
             btnPausar.IconChar = FontAwesome.Sharp.IconChar.Pause;
-            btnPausar.IconColor = Color.FromArgb(6, 128, 254);
+            btnPausar.IconColor = Color.Orange;
             btnPausar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnPausar.IconSize = 42;
             btnPausar.Location = new Point(296, 361);
@@ -547,7 +547,7 @@
             btnContinuar.FlatAppearance.BorderSize = 0;
             btnContinuar.FlatStyle = FlatStyle.Flat;
             btnContinuar.IconChar = FontAwesome.Sharp.IconChar.Play;
-            btnContinuar.IconColor = Color.FromArgb(6, 128, 254);
+            btnContinuar.IconColor = Color.Green;
             btnContinuar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnContinuar.IconSize = 42;
             btnContinuar.Location = new Point(246, 361);
@@ -574,16 +574,6 @@
             lblStatus.Size = new Size(39, 17);
             lblStatus.Text = "Status";
             // 
-            // progressBarTotal
-            // 
-            progressBarTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBarTotal.Location = new Point(57, 328);
-            progressBarTotal.Name = "progressBarTotal";
-            progressBarTotal.Size = new Size(561, 10);
-            progressBarTotal.Style = ProgressBarStyle.Continuous;
-            progressBarTotal.TabIndex = 1042;
-            progressBarTotal.UseKrypton = true;
-            // 
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -595,6 +585,16 @@
             lblStatusContagem.Name = "lblStatusContagem";
             lblStatusContagem.Size = new Size(98, 17);
             lblStatusContagem.Text = "Status Contagem";
+            // 
+            // progressBarTotal
+            // 
+            progressBarTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            progressBarTotal.Location = new Point(57, 328);
+            progressBarTotal.Name = "progressBarTotal";
+            progressBarTotal.Size = new Size(561, 10);
+            progressBarTotal.Style = ProgressBarStyle.Continuous;
+            progressBarTotal.TabIndex = 1042;
+            progressBarTotal.UseKrypton = true;
             // 
             // FrmDownload
             // 
