@@ -42,6 +42,7 @@
             pnlContainer = new Krypton.Toolkit.KryptonPanel();
             lblVersaoSistema = new Krypton.Toolkit.KryptonLabel();
             picLogoCentro = new PictureBox();
+            btnSobre = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)pnlBarraLateralMenu).BeginInit();
             pnlBarraLateralMenu.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -108,6 +109,7 @@
             flowLayoutPanel1.Controls.Add(btnDownload);
             flowLayoutPanel1.Controls.Add(btnConverterVideo);
             flowLayoutPanel1.Controls.Add(btnCompressAudio);
+            flowLayoutPanel1.Controls.Add(btnSobre);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -230,6 +232,23 @@
             picLogoCentro.TabIndex = 0;
             picLogoCentro.TabStop = false;
             // 
+            // btnSobre
+            // 
+            btnSobre.BackColor = Color.LightSkyBlue;
+            btnSobre.ForeColor = Color.White;
+            btnSobre.IconChar = FontAwesome.Sharp.IconChar.InfoCircle;
+            btnSobre.IconColor = Color.White;
+            btnSobre.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSobre.IconSize = 38;
+            btnSobre.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSobre.Location = new Point(3, 181);
+            btnSobre.Name = "btnSobre";
+            btnSobre.Size = new Size(165, 38);
+            btnSobre.TabIndex = 3;
+            btnSobre.Text = "Sobre";
+            btnSobre.UseVisualStyleBackColor = false;
+            btnSobre.Click += btnSobre_Click;
+            // 
             // FrmPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -273,5 +292,6 @@
         private FontAwesome.Sharp.IconButton btnCompressAudio;
         private PictureBox picLogoCentro;
         private Krypton.Toolkit.KryptonLabel lblVersaoSistema;
+        private FontAwesome.Sharp.IconButton btnSobre;
     }
 }

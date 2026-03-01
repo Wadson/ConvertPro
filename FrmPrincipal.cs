@@ -9,7 +9,7 @@ namespace ConvertPro
         {
             InitializeComponent();
         }
-       
+
 
         private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -88,8 +88,7 @@ namespace ConvertPro
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"Falha ao preparar ferramentas internas:\n\n{ex.Message}",
+                MessageBox.Show($"Falha ao preparar ferramentas internas:\n\n{ex.Message}",
                     "Erro crítico",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -119,6 +118,11 @@ namespace ConvertPro
         private void btnConverterVideo_Click(object sender, EventArgs e)
         {
             AbrirFormEnPanel(new FrmConverterMpQuatro());
+        }
+
+        private void btnSobre_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new AboutBox1());
         }
     }
 }

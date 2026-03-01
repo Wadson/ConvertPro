@@ -1,14 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "VmXDAi5wgUI=",
+  "dgSpecHash": "zaLixZH8sME=",
   "success": true,
   "projectFilePath": "C:\\ConvertPro\\ConvertPro.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\iConnect\\.nuget\\packages\\anglesharp\\1.4.0\\anglesharp.1.4.0.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\ffmpegcore\\5.4.0\\ffmpegcore.5.4.0.nupkg.sha512",
     "C:\\Users\\iConnect\\.nuget\\packages\\fontawesome.sharp\\6.3.0\\fontawesome.sharp.6.3.0.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\instances\\3.0.2\\instances.3.0.2.nupkg.sha512",
     "C:\\Users\\iConnect\\.nuget\\packages\\microsoft.netcore.platforms\\7.0.4\\microsoft.netcore.platforms.7.0.4.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\nreco.videoconverter\\1.2.1\\nreco.videoconverter.1.2.1.nupkg.sha512",
     "C:\\Users\\iConnect\\.nuget\\packages\\windowsapicodepack\\8.0.14\\windowsapicodepack.8.0.14.nupkg.sha512",
     "C:\\Users\\iConnect\\.nuget\\packages\\windowsapicodepackcore\\8.0.14\\windowsapicodepackcore.8.0.14.nupkg.sha512",
-    "C:\\Users\\iConnect\\.nuget\\packages\\windowsapicodepackshell\\8.0.14\\windowsapicodepackshell.8.0.14.nupkg.sha512"
+    "C:\\Users\\iConnect\\.nuget\\packages\\windowsapicodepackshell\\8.0.14\\windowsapicodepackshell.8.0.14.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\youtubeexplode\\6.5.7\\youtubeexplode.6.5.7.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.3\\microsoft.netcore.app.runtime.win-x64.10.0.3.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.3\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.3.nupkg.sha512",
+    "C:\\Users\\iConnect\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.3\\microsoft.aspnetcore.app.runtime.win-x64.10.0.3.nupkg.sha512"
   ],
   "logs": []
 }

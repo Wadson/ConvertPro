@@ -19,7 +19,7 @@ namespace ConvertPro
 {
     public partial class FrmDownload : KryptonForm
     {
-        private const string UrlPlaceholder = "Cole o link do vídeo aqui e clique em Adicionar";
+       
 
         private bool isDownloading = false;
         private bool isPaused = false; // <--- nova flag
@@ -44,9 +44,6 @@ namespace ConvertPro
         {
             InitializeComponent();
             InitializeForm();
-            this.Shown += (s, e) => AplicarPlaceholderUrl();
-
-
             progressBarTotal.Minimum = 0;
             progressBarTotal.Maximum = expandedList.Count;
             progressBarTotal.Value = 0;
@@ -111,39 +108,10 @@ namespace ConvertPro
             return false;
         }
 
-        private void AplicarPlaceholderUrl()
-        {
-            if (string.IsNullOrWhiteSpace(txtUrl.Text))
-            {
-                txtUrl.Text = UrlPlaceholder;
-                txtUrl.ForeColor = Color.Gray;
-            }
-        }
+       
 
         private void InitializeForm()
         {
-            txtUrl.ForeColor = Color.Gray;
-
-            txtUrl.GotFocus += (s, e) =>
-            {
-                if (txtUrl.Text == UrlPlaceholder)
-                {
-                    txtUrl.Clear();
-                    txtUrl.ForeColor = Color.Black;
-                }
-            };
-
-            txtUrl.LostFocus += (s, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(txtUrl.Text))
-                {
-                    txtUrl.Text = UrlPlaceholder;
-                    txtUrl.ForeColor = Color.Gray;
-                }
-            };
-
-
-
             cmbVideoQuality.Items.AddRange(new object[] { "4320p (8K)", "2160p (4K)", "1440p", "1080p", "720p", "480p", "360p", "Melhor disponível" });
             cmbVideoQuality.SelectedIndex = 3;
 

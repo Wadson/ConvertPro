@@ -8,8 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resources\ConvertPro.ico</ApplicationIcon>
     <PackageIcon>LogoConvertPro.png</PackageIcon>
-    <AssemblyVersion>2.0.0</AssemblyVersion>
-    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.5.0</AssemblyVersion>
+    <FileVersion>2.5.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.4.0" />
+    <PackageReference Include="FFMpegCore" Version="5.4.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="NReco.VideoConverter" Version="1.2.1" />
     <PackageReference Include="WindowsAPICodePack" Version="8.0.14" />
     <PackageReference Include="WindowsAPICodePackShell" Version="8.0.14" />
+    <PackageReference Include="YoutubeExplode" Version="6.5.7" />
   </ItemGroup>
 
   <ItemGroup>

@@ -105,6 +105,8 @@
             // txtPathVideo
             // 
             txtPathVideo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtPathVideo.CueHint.CueHintText = "Selecione os arquivos de vídeo Mp4 clicando na pasta ao lado >>";
+            txtPathVideo.CueHint.Padding = new Padding(0);
             txtPathVideo.Location = new Point(0, 98);
             txtPathVideo.Margin = new Padding(4, 3, 4, 3);
             txtPathVideo.Name = "txtPathVideo";
@@ -211,9 +213,9 @@
             // progressBar
             // 
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            progressBar.Location = new Point(-11, 376);
+            progressBar.Location = new Point(12, 376);
             progressBar.Name = "progressBar";
-            progressBar.Size = new Size(561, 23);
+            progressBar.Size = new Size(538, 23);
             progressBar.TabIndex = 1033;
             progressBar.UseKrypton = true;
             // 

@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{631A8049-8720-3CA6-DB9E-2B5B025EBC8E}|ConvertPro.csproj|solutionrelative:frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{631A8049-8720-3CA6-DB9E-2B5B025EBC8E}|ConvertPro.csproj|c:\\convertpro\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{631A8049-8720-3CA6-DB9E-2B5B025EBC8E}|ConvertPro.csproj|C:\\ConvertPro\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{631A8049-8720-3CA6-DB9E-2B5B025EBC8E}|ConvertPro.csproj|solutionrelative:frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -128,9 +128,9 @@
               "RelativeDocumentMoniker": "FrmPrincipal.cs",
               "ToolTip": "C:\\ConvertPro\\FrmPrincipal.cs",
               "RelativeToolTip": "FrmPrincipal.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwD4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAMwGMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T02:01:21.344Z",
+              "WhenOpened": "2026-03-01T02:10:37.621Z",
               "EditorCaption": ""
             },
             {
@@ -142,8 +142,7 @@
               "ToolTip": "C:\\ConvertPro\\FrmPrincipal.cs [Projeto]",
               "RelativeToolTip": "FrmPrincipal.cs [Projeto]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-02T02:01:09.966Z",
-              "EditorCaption": " [Projeto]"
+              "WhenOpened": "2026-03-01T02:10:35.192Z"
             }
           ]
         },

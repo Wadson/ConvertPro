@@ -2,6 +2,31 @@
   "version": 3,
   "targets": {
     "net10.0-windows7.0": {
+      "AngleSharp/1.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "FFMpegCore/5.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Instances": "3.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/FFMpegCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FFMpegCore.dll": {}
+        }
+      },
       "FontAwesome.Sharp/6.3.0": {
         "type": "package",
         "compile": {
@@ -14,6 +39,22 @@
           "Microsoft.WindowsDesktop.App"
         ]
       },
+      "Instances/3.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Instances.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Instances.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/7.0.4": {
         "type": "package",
         "compile": {
@@ -21,6 +62,19 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "NReco.VideoConverter/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NReco.VideoConverter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NReco.VideoConverter.dll": {
+            "related": ".xml"
+          }
         }
       },
       "WindowsAPICodePack/8.0.14": {
@@ -106,10 +160,239 @@
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
         ]
+      },
+      "YoutubeExplode/6.5.7": {
+        "type": "package",
+        "dependencies": {
+          "AngleSharp": "1.4.0"
+        },
+        "compile": {
+          "lib/net10.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        }
+      }
+    },
+    "net10.0-windows7.0/win-x64": {
+      "AngleSharp/1.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/AngleSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "FFMpegCore/5.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Instances": "3.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/FFMpegCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FFMpegCore.dll": {}
+        }
+      },
+      "FontAwesome.Sharp/6.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/FontAwesome.Sharp.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/FontAwesome.Sharp.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App"
+        ]
+      },
+      "Instances/3.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Instances.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Instances.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/7.0.4": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/_._": {}
+        }
+      },
+      "NReco.VideoConverter/1.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NReco.VideoConverter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NReco.VideoConverter.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "WindowsAPICodePack/8.0.14": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Sensors.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ShellExtensions.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.dll": {
+            "related": ".Core.xml;.ExtendedLinguisticServices.xml;.Sensors.xml;.Shell.xml;.ShellExtensions.xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Sensors.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.ShellExtensions.dll": {
+            "related": ".xml"
+          },
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.dll": {
+            "related": ".Core.xml;.ExtendedLinguisticServices.xml;.Sensors.xml;.Shell.xml;.ShellExtensions.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      },
+      "WindowsAPICodePackCore/8.0.14": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "7.0.4"
+        },
+        "compile": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      },
+      "WindowsAPICodePackShell/8.0.14": {
+        "type": "package",
+        "dependencies": {
+          "WindowsAPICodePackCore": "8.0.14"
+        },
+        "compile": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0-windows7.0/Microsoft.WindowsAPICodePack.Shell.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "YoutubeExplode/6.5.7": {
+        "type": "package",
+        "dependencies": {
+          "AngleSharp": "1.4.0"
+        },
+        "compile": {
+          "lib/net10.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/YoutubeExplode.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
   "libraries": {
+    "AngleSharp/1.4.0": {
+      "sha512": "6ph8mpaQx0KL0COYRt0kI8MB9gSp1PtKijKMhJU//+aVFgKAJLKDesG/+26JSaVCOrHNgPf12wpfoyRcMYOeXg==",
+      "type": "package",
+      "path": "anglesharp/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "anglesharp.1.4.0.nupkg.sha512",
+        "anglesharp.nuspec",
+        "lib/net10.0/AngleSharp.dll",
+        "lib/net10.0/AngleSharp.xml",
+        "lib/net462/AngleSharp.dll",
+        "lib/net462/AngleSharp.xml",
+        "lib/net472/AngleSharp.dll",
+        "lib/net472/AngleSharp.xml",
+        "lib/net8.0/AngleSharp.dll",
+        "lib/net8.0/AngleSharp.xml",
+        "lib/netstandard2.0/AngleSharp.dll",
+        "lib/netstandard2.0/AngleSharp.xml",
+        "logo.png"
+      ]
+    },
+    "FFMpegCore/5.4.0": {
+      "sha512": "nymhPWpwvBaB4fOqf0thxg7Inm8SrruFQLdCMFEDKD8S3hy0/iV2vuKaJvaL9ZnbJx/2rJCHnJXOymo2apXovg==",
+      "type": "package",
+      "path": "ffmpegcore/5.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "ffmpegcore.5.4.0.nupkg.sha512",
+        "ffmpegcore.nuspec",
+        "lib/netstandard2.0/FFMpegCore.dll"
+      ]
+    },
     "FontAwesome.Sharp/6.3.0": {
       "sha512": "3/Fb0N04yYK8An07oox5ISlUyNgsnWildHfoP69uqTEOsemQemRyciphMkXZOcdBupjUD+lVsRE3FqG41/dzPA==",
       "type": "package",
@@ -123,6 +406,21 @@
         "lib/net48/FontAwesome.Sharp.dll",
         "lib/net6.0-windows7.0/FontAwesome.Sharp.dll",
         "lib/netcoreapp3.1/FontAwesome.Sharp.dll"
+      ]
+    },
+    "Instances/3.0.2": {
+      "sha512": "LfhegDpmA8PuHW58RmgVvCDG/mfVCTU+Vhy4ppmXLJfAer33Xl0NocDy92OwSL6CnkVdx41O/I0+BjNhU1JtMQ==",
+      "type": "package",
+      "path": "instances/3.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "content/README.md",
+        "contentFiles/any/netstandard2.0/README.md",
+        "instances.3.0.2.nupkg.sha512",
+        "instances.nuspec",
+        "lib/netstandard2.0/Instances.dll"
       ]
     },
     "Microsoft.NETCore.Platforms/7.0.4": {
@@ -140,6 +438,21 @@
         "microsoft.netcore.platforms.nuspec",
         "runtime.json",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "NReco.VideoConverter/1.2.1": {
+      "sha512": "d/V78hRW6Iqi9+lNrivCWL9qMiiJ8WCrwN1wpEvGq+3mE3uIy7VYhkgHrJBkUzx4RRQKEJ9UvCvVb+0ELIbGWg==",
+      "type": "package",
+      "path": "nreco.videoconverter/1.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/NReco.VideoConverter.dll",
+        "lib/net45/NReco.VideoConverter.xml",
+        "lib/netstandard2.0/NReco.VideoConverter.dll",
+        "lib/netstandard2.0/NReco.VideoConverter.xml",
+        "nreco.videoconverter.1.2.1.nupkg.sha512",
+        "nreco.videoconverter.nuspec"
       ]
     },
     "WindowsAPICodePack/8.0.14": {
@@ -333,13 +646,37 @@
         "windowsapicodepackshell.8.0.14.nupkg.sha512",
         "windowsapicodepackshell.nuspec"
       ]
+    },
+    "YoutubeExplode/6.5.7": {
+      "sha512": "oIJpcxpgSUaPxg73iYj1a0hckbCbOHOrE1OzeCH9lNf6oRjJp2awOyPaWvf1qRm6kYFJ88FktdMeT+lGyNUcvA==",
+      "type": "package",
+      "path": "youtubeexplode/6.5.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "favicon.png",
+        "lib/net10.0/YoutubeExplode.dll",
+        "lib/net10.0/YoutubeExplode.xml",
+        "lib/net6.0/YoutubeExplode.dll",
+        "lib/net6.0/YoutubeExplode.xml",
+        "lib/net7.0/YoutubeExplode.dll",
+        "lib/net7.0/YoutubeExplode.xml",
+        "lib/netstandard2.0/YoutubeExplode.dll",
+        "lib/netstandard2.0/YoutubeExplode.xml",
+        "youtubeexplode.6.5.7.nupkg.sha512",
+        "youtubeexplode.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net10.0-windows7.0": [
+      "AngleSharp >= 1.4.0",
+      "FFMpegCore >= 5.4.0",
       "FontAwesome.Sharp >= 6.3.0",
+      "NReco.VideoConverter >= 1.2.1",
       "WindowsAPICodePack >= 8.0.14",
-      "WindowsAPICodePackShell >= 8.0.14"
+      "WindowsAPICodePackShell >= 8.0.14",
+      "YoutubeExplode >= 6.5.7"
     ]
   },
   "packageFolders": {
@@ -393,9 +730,21 @@
       "net10.0-windows7.0": {
         "targetAlias": "net10.0-windows",
         "dependencies": {
+          "AngleSharp": {
+            "target": "Package",
+            "version": "[1.4.0, )"
+          },
+          "FFMpegCore": {
+            "target": "Package",
+            "version": "[5.4.0, )"
+          },
           "FontAwesome.Sharp": {
             "target": "Package",
             "version": "[6.3.0, )"
+          },
+          "NReco.VideoConverter": {
+            "target": "Package",
+            "version": "[1.2.1, )"
           },
           "WindowsAPICodePack": {
             "target": "Package",
@@ -404,6 +753,10 @@
           "WindowsAPICodePackShell": {
             "target": "Package",
             "version": "[8.0.14, )"
+          },
+          "YoutubeExplode": {
+            "target": "Package",
+            "version": "[6.5.7, )"
           }
         },
         "imports": [
@@ -417,6 +770,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+            "version": "[10.0.3, 10.0.3]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[10.0.3, 10.0.3]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+            "version": "[10.0.3, 10.0.3]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -425,7 +792,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -716,6 +1083,11 @@
           "System.Xml.XPath": "(,4.3.32767]",
           "System.Xml.XPath.XDocument": "(,5.0.32767]"
         }
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
       }
     }
   }

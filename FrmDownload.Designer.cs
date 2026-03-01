@@ -112,6 +112,8 @@
             // txtUrl
             // 
             txtUrl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtUrl.CueHint.CueHintText = "Cole o link do vídeo aqui e clique em Adicionar";
+            txtUrl.CueHint.Padding = new Padding(0);
             txtUrl.Location = new Point(57, 83);
             txtUrl.Margin = new Padding(4, 3, 4, 3);
             txtUrl.Name = "txtUrl";
