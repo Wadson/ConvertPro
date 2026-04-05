@@ -8,8 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resources\ConvertPro.ico</ApplicationIcon>
     <PackageIcon>LogoConvertPro.png</PackageIcon>
-    <AssemblyVersion>2.5.0</AssemblyVersion>
-    <FileVersion>2.5.0</FileVersion>
+    <AssemblyVersion>2.5.1</AssemblyVersion>
+    <FileVersion>2.5.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

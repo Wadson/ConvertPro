@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConvertPro")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("2.5.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a9402088e7bcf4612181648be82a4afe1c6f048")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("2.5.1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b941cc64e5edb2d2b2a15010293ad85a01a719f0")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConvertPro")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConvertPro")]
-[assembly: System.Reflection.AssemblyVersionAttribute("2.5.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("2.5.1")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 

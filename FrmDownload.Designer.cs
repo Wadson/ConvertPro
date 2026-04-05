@@ -64,6 +64,7 @@
             lblStatusContagem = new ToolStripStatusLabel();
             toolTip1 = new ToolTip(components);
             progressBarTotal = new Krypton.Toolkit.KryptonProgressBar();
+            chkBaixarThumbinail = new Krypton.Toolkit.KryptonCheckBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cmbVideoQuality).BeginInit();
@@ -114,10 +115,10 @@
             txtUrl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtUrl.CueHint.CueHintText = "Cole o link do vídeo aqui e clique em Adicionar";
             txtUrl.CueHint.Padding = new Padding(0);
-            txtUrl.Location = new Point(57, 83);
+            txtUrl.Location = new Point(65, 83);
             txtUrl.Margin = new Padding(4, 3, 4, 3);
             txtUrl.Name = "txtUrl";
-            txtUrl.Size = new Size(569, 30);
+            txtUrl.Size = new Size(561, 30);
             txtUrl.StateCommon.Back.Color1 = Color.White;
             txtUrl.StateCommon.Border.Color1 = Color.FromArgb(8, 142, 254);
             txtUrl.StateCommon.Border.Color2 = Color.FromArgb(8, 142, 254);
@@ -132,7 +133,7 @@
             // 
             // lblLink
             // 
-            lblLink.Location = new Point(3, 85);
+            lblLink.Location = new Point(-1, 85);
             lblLink.Name = "lblLink";
             lblLink.Size = new Size(38, 21);
             lblLink.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
@@ -213,7 +214,7 @@
             // 
             // lblTitulo
             // 
-            lblTitulo.Location = new Point(3, 118);
+            lblTitulo.Location = new Point(-1, 118);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(47, 21);
             lblTitulo.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
@@ -225,10 +226,10 @@
             // txtTitle
             // 
             txtTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtTitle.Location = new Point(57, 116);
+            txtTitle.Location = new Point(65, 116);
             txtTitle.Margin = new Padding(4, 3, 4, 3);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(569, 30);
+            txtTitle.Size = new Size(561, 30);
             txtTitle.StateCommon.Back.Color1 = Color.White;
             txtTitle.StateCommon.Border.Color1 = Color.FromArgb(8, 142, 254);
             txtTitle.StateCommon.Border.Color2 = Color.FromArgb(8, 142, 254);
@@ -264,20 +265,20 @@
             cmbVideoQuality.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVideoQuality.DropDownWidth = 185;
             cmbVideoQuality.IntegralHeight = false;
-            cmbVideoQuality.Location = new Point(95, 151);
+            cmbVideoQuality.Location = new Point(97, 149);
             cmbVideoQuality.Name = "cmbVideoQuality";
-            cmbVideoQuality.Size = new Size(165, 35);
-            cmbVideoQuality.StateActive.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbVideoQuality.Size = new Size(103, 27);
+            cmbVideoQuality.StateActive.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
             cmbVideoQuality.StateActive.ComboBox.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbVideoQuality.StateActive.ComboBox.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbVideoQuality.StateActive.ComboBox.Border.ColorAngle = 45F;
             cmbVideoQuality.StateActive.ComboBox.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
             cmbVideoQuality.StateActive.ComboBox.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            cmbVideoQuality.StateActive.ComboBox.Border.Rounding = 20F;
+            cmbVideoQuality.StateActive.ComboBox.Border.Rounding = 6F;
             cmbVideoQuality.StateActive.ComboBox.Border.Width = 1;
             cmbVideoQuality.StateActive.ComboBox.Content.Color1 = Color.White;
             cmbVideoQuality.StateActive.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbVideoQuality.StateCommon.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbVideoQuality.StateCommon.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
             cmbVideoQuality.StateCommon.ComboBox.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbVideoQuality.StateCommon.ComboBox.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbVideoQuality.StateCommon.ComboBox.Border.ColorAngle = 45F;
@@ -298,14 +299,18 @@
             cmbVideoQuality.StateCommon.Item.Border.Rounding = 20F;
             cmbVideoQuality.StateCommon.Item.Border.Width = 1;
             cmbVideoQuality.StateCommon.Item.Content.ShortText.Color1 = Color.White;
-            cmbVideoQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbVideoQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
+            cmbVideoQuality.StateNormal.ComboBox.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            cmbVideoQuality.StateNormal.ComboBox.Border.Rounding = 6F;
             cmbVideoQuality.StateNormal.ComboBox.Content.Color1 = Color.White;
+            cmbVideoQuality.StateTracking.Item.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            cmbVideoQuality.StateTracking.Item.Border.Rounding = 6F;
             cmbVideoQuality.TabIndex = 1021;
             cmbVideoQuality.SelectedIndexChanged += cmbVideoQuality_SelectedIndexChanged;
             // 
             // lblVideoQuality
             // 
-            lblVideoQuality.Location = new Point(0, 158);
+            lblVideoQuality.Location = new Point(-1, 152);
             lblVideoQuality.Name = "lblVideoQuality";
             lblVideoQuality.Size = new Size(94, 21);
             lblVideoQuality.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
@@ -316,7 +321,7 @@
             // 
             // lblAudioQuality
             // 
-            lblAudioQuality.Location = new Point(266, 158);
+            lblAudioQuality.Location = new Point(208, 152);
             lblAudioQuality.Name = "lblAudioQuality";
             lblAudioQuality.Size = new Size(95, 21);
             lblAudioQuality.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
@@ -331,20 +336,20 @@
             cmbAudioQuality.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbAudioQuality.DropDownWidth = 185;
             cmbAudioQuality.IntegralHeight = false;
-            cmbAudioQuality.Location = new Point(363, 151);
+            cmbAudioQuality.Location = new Point(305, 149);
             cmbAudioQuality.Name = "cmbAudioQuality";
-            cmbAudioQuality.Size = new Size(163, 35);
-            cmbAudioQuality.StateActive.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.Size = new Size(104, 27);
+            cmbAudioQuality.StateActive.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
             cmbAudioQuality.StateActive.ComboBox.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbAudioQuality.StateActive.ComboBox.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateActive.ComboBox.Border.ColorAngle = 45F;
             cmbAudioQuality.StateActive.ComboBox.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
             cmbAudioQuality.StateActive.ComboBox.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            cmbAudioQuality.StateActive.ComboBox.Border.Rounding = 20F;
+            cmbAudioQuality.StateActive.ComboBox.Border.Rounding = 6F;
             cmbAudioQuality.StateActive.ComboBox.Border.Width = 1;
             cmbAudioQuality.StateActive.ComboBox.Content.Color1 = Color.White;
             cmbAudioQuality.StateActive.ComboBox.Content.Font = new Font("Poppins", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbAudioQuality.StateCommon.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateCommon.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
             cmbAudioQuality.StateCommon.ComboBox.Border.Color1 = Color.FromArgb(6, 174, 244);
             cmbAudioQuality.StateCommon.ComboBox.Border.Color2 = Color.FromArgb(8, 142, 254);
             cmbAudioQuality.StateCommon.ComboBox.Border.ColorAngle = 45F;
@@ -365,14 +370,18 @@
             cmbAudioQuality.StateCommon.Item.Border.Rounding = 20F;
             cmbAudioQuality.StateCommon.Item.Border.Width = 1;
             cmbAudioQuality.StateCommon.Item.Content.ShortText.Color1 = Color.White;
-            cmbAudioQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(8, 142, 254);
+            cmbAudioQuality.StateNormal.ComboBox.Back.Color1 = Color.FromArgb(183, 219, 255);
+            cmbAudioQuality.StateNormal.ComboBox.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            cmbAudioQuality.StateNormal.ComboBox.Border.Rounding = 6F;
             cmbAudioQuality.StateNormal.ComboBox.Content.Color1 = Color.White;
+            cmbAudioQuality.StateTracking.Item.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            cmbAudioQuality.StateTracking.Item.Border.Rounding = 6F;
             cmbAudioQuality.TabIndex = 1023;
             cmbAudioQuality.SelectedIndexChanged += cmbAudioQuality_SelectedIndexChanged;
             // 
             // chkAudioOnly
             // 
-            chkAudioOnly.Location = new Point(541, 158);
+            chkAudioOnly.Location = new Point(420, 152);
             chkAudioOnly.Name = "chkAudioOnly";
             chkAudioOnly.Size = new Size(85, 20);
             chkAudioOnly.TabIndex = 1025;
@@ -380,7 +389,7 @@
             // 
             // lblDestino
             // 
-            lblDestino.Location = new Point(-3, 198);
+            lblDestino.Location = new Point(-1, 198);
             lblDestino.Name = "lblDestino";
             lblDestino.Size = new Size(59, 21);
             lblDestino.StateCommon.ShortText.Color1 = Color.FromArgb(6, 128, 254);
@@ -392,10 +401,10 @@
             // txtFilePath
             // 
             txtFilePath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtFilePath.Location = new Point(57, 195);
+            txtFilePath.Location = new Point(65, 195);
             txtFilePath.Margin = new Padding(4, 3, 4, 3);
             txtFilePath.Name = "txtFilePath";
-            txtFilePath.Size = new Size(569, 30);
+            txtFilePath.Size = new Size(561, 30);
             txtFilePath.StateCommon.Back.Color1 = Color.White;
             txtFilePath.StateCommon.Border.Color1 = Color.FromArgb(8, 142, 254);
             txtFilePath.StateCommon.Border.Color2 = Color.FromArgb(8, 142, 254);
@@ -598,12 +607,24 @@
             progressBarTotal.TabIndex = 1042;
             progressBarTotal.UseKrypton = true;
             // 
+            // chkBaixarThumbinail
+            // 
+            chkBaixarThumbinail.Location = new Point(511, 152);
+            chkBaixarThumbinail.Name = "chkBaixarThumbinail";
+            chkBaixarThumbinail.Size = new Size(120, 20);
+            chkBaixarThumbinail.StateCommon.ShortText.Color1 = Color.OrangeRed;
+            chkBaixarThumbinail.StateCommon.ShortText.Trim = Krypton.Toolkit.PaletteTextTrim.Hide;
+            chkBaixarThumbinail.TabIndex = 1150;
+            toolTip1.SetToolTip(chkBaixarThumbinail, "Thumbinail é a foto da capa");
+            chkBaixarThumbinail.Values.Text = "Baixar Thumbinail";
+            // 
             // FrmDownload
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(252, 252, 252);
             ClientSize = new Size(683, 424);
+            Controls.Add(chkBaixarThumbinail);
             Controls.Add(progressBarTotal);
             Controls.Add(statusStrip1);
             Controls.Add(btnContinuar);
@@ -685,5 +706,6 @@
         private Krypton.Toolkit.KryptonProgressBar progressBarTotal;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel lblStatusContagem;
+        private Krypton.Toolkit.KryptonCheckBox chkBaixarThumbinail;
     }
 }

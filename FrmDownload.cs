@@ -419,7 +419,14 @@ namespace ConvertPro
                     video.Status = StatusVideo.Baixando;
                     ListBoxURL.Refresh();
 
-                    await DownloadVideoAsync(video, i + 1, totalCount, cancellationToken);
+                    if (chkBaixarThumbinail.Checked)
+                    {
+                        await DownloadVideoWithThumbnailAsync(video, i + 1, totalCount, cancellationToken);
+                    }
+                    else
+                    {
+                        await DownloadVideoAsync(video, i + 1, totalCount, cancellationToken);
+                    }
 
                     // ✅ sucesso
                     video.Status = StatusVideo.Concluido;
@@ -489,11 +496,17 @@ namespace ConvertPro
                 "--fragment-retries 10 " +
                 "--concurrent-fragments 3 " +
                 "--user-agent \"Mozilla/5.0\" " +
+                "--no-write-thumbnail " +
                 "--referer \"https://www.youtube.com/\" " +
                 (chkAudioOnly.Checked
                     ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
-                    : "--embed-thumbnail --add-metadata ") +
+                    : "--add-metadata ") +
                 $"\"{video.Url}\"";
+
+
+
+
+
 
             if (File.Exists(ffmpegPath))
             {
@@ -565,8 +578,11 @@ namespace ConvertPro
                 if (cancellationToken.IsCancellationRequested)
                     throw new OperationCanceledException();
 
+                // 🔍 Verifica se o vídeo foi realmente criado
                 if (process.ExitCode != 0)
-                    throw new Exception("Falha no download. Vídeo pode estar restrito ou indisponível.");
+                {
+                    throw new Exception("Falha no download.");
+                }               
 
                 // ✅ SUCESSO REAL
                 Invoke((MethodInvoker)(() =>
@@ -606,19 +622,24 @@ namespace ConvertPro
             string formato = "best[ext=mp4]/best";
             string outputTemplate = Path.Combine(outputDir, "%(title)s.%(ext)s");
 
-            string args = $"--newline " +
-                          $"--output \"{outputTemplate}\" " +
-                          $"--format \"{formato}\" " +
-                          "--ignore-errors " +
-                          "--no-warnings " +
-                          "--no-check-certificates " +
-                          "--user-agent \"Mozilla/5.0\" " +
-                          "--referer \"https://www.youtube.com/\" " +
-                          (isPlaylistItem ? "--yes-playlist " : "--no-playlist ") +
-                          (chkAudioOnly.Checked
-                              ? $"--extract-audio --audio-format mp3 --audio-quality 128k "
-                              : "--merge-output-format mp4 ") +
-                          $"\"{video.Url}\"";
+            string args =
+             $"--newline " +
+             $"--output \"{outputTemplate}\" " +
+             $"--format \"{formato}\" " +
+             "--ignore-errors " +
+             "--no-warnings " +
+             "--retries 10 " +
+             "--fragment-retries 10 " +
+             "--concurrent-fragments 3 " +
+             "--user-agent \"Mozilla/5.0\" " +
+             "--referer \"https://www.youtube.com/\" " +
+             (chkAudioOnly.Checked
+                 ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
+                 : "--add-metadata ") +
+             $"\"{video.Url}\"";
+
+
+
 
             if (File.Exists(ffmpegPath))
             {
@@ -1151,7 +1172,121 @@ namespace ConvertPro
             lblStatus.Text = "⏹️ Cancelado pelo usuário";
             lblStatus.BackColor = Color.Red;
         }
+        private async Task DownloadVideoWithThumbnailAsync(
+    PlaylistVideo video,
+    int current,
+    int total,
+    CancellationToken cancellationToken)
+        {
+            Invoke((MethodInvoker)(() =>
+            {
+                progressBarVideo.Value = 0;
+            }));
 
+            string outputDir = txtFilePath.Text;
+
+            if (!string.IsNullOrWhiteSpace(video.PlaylistTitle))
+            {
+                outputDir = Path.Combine(outputDir, SanitizeFileName(video.PlaylistTitle));
+                Directory.CreateDirectory(outputDir);
+            }
+
+            string format = chkAudioOnly.Checked
+                ? "bestaudio/best"
+                : "best[ext=mp4]/best";
+
+            string outputTemplate = Path.Combine(outputDir, "%(title)s.%(ext)s");
+
+            string args =
+                $"--newline " +
+                $"--output \"{outputTemplate}\" " +
+                $"--format \"{format}\" " +
+                "--ignore-errors " +
+                "--no-warnings " +
+                "--retries 10 " +
+                "--fragment-retries 10 " +
+                "--concurrent-fragments 3 " +
+                "--user-agent \"Mozilla/5.0\" " +
+                "--referer \"https://www.youtube.com/\" " +
+                "--write-thumbnail " + // 🔥 AQUI ATIVA
+                (File.Exists(ffmpegPath) ? "--convert-thumbnails jpg " : "") +
+                (chkAudioOnly.Checked
+                    ? $"--extract-audio --audio-format mp3 --audio-quality {selectedAudioQuality}k "
+                    : "--embed-thumbnail --add-metadata ") +
+                $"\"{video.Url}\"";
+
+            if (File.Exists(ffmpegPath))
+            {
+                string ffmpegDir = Path.GetDirectoryName(ffmpegPath);
+                args += $" --ffmpeg-location \"{ffmpegDir}\"";
+            }
+
+            await ExecutarProcessoDownload(args, video, current, total, cancellationToken);
+        }
+        private async Task ExecutarProcessoDownload(
+    string args,
+    PlaylistVideo video,
+    int current,
+    int total,
+    CancellationToken cancellationToken)
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = ytDlpPath,
+                Arguments = args,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8
+            };
+
+            using var process = new Process { StartInfo = psi };
+            currentProcess = process;
+
+            process.OutputDataReceived += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(e.Data)) return;
+
+                string line = e.Data.Trim();
+
+                if (line.Contains("[download]") && line.Contains("%"))
+                {
+                    var m = Regex.Match(line, @"(\d+(\.\d+)?)%");
+                    if (m.Success)
+                    {
+                        int percent = (int)float.Parse(m.Groups[1].Value);
+
+                        Invoke((MethodInvoker)(() =>
+                        {
+                            progressBarVideo.Value = Math.Min(percent, 100);
+                        }));
+                    }
+                }
+            };
+
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            await process.WaitForExitAsync(cancellationToken);
+
+            if (process.ExitCode != 0)
+                throw new Exception("Falha no download.");
+
+            Invoke((MethodInvoker)(() =>
+            {
+                progressBarVideo.Value = 100;
+                lblStatus.Text = $"✅ {current}/{total} Concluído";
+                lblStatus.BackColor = Color.LimeGreen;
+
+                video.Status = StatusVideo.Concluido;
+                ListBoxURL.Refresh();
+            }));
+
+            currentProcess = null;
+        }
         private async void btnDownload_Click(object sender, EventArgs e)
         {
             // ====== VALIDAÇÃO INICIAL ======
